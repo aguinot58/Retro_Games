@@ -1,1 +1,157 @@
 /* CSS page de connexion */
+html, body{
+    padding: 0;
+    margin: 0;
+    background-color: bisque;
+}
+
+#section-1{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#streets_deco{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 2%;
+    top: 5%;
+    transition: 0.55s ease;
+}
+
+#rayman_deco{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 86%;
+    top: 40%;
+    transition: 0.55s ease;
+}
+
+#starfox_deco{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 2%;
+    top: 65%;
+    transition: 0.55s ease;
+}
+
+.conteneur-form-login{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    display: flex;
+    background-image: url("./../img/shelf.jpg");
+    background-size: cover;
+    align-items: center;
+    margin-top: -3px;
+    padding-top: 150px;
+    padding-bottom: 175px;
+    justify-content: center;
+}
+
+#haut-etagere{
+    width: 100%;
+}
+
+.form-connexion{
+    width: 100%;
+    display: flex;
+    padding-left: 25%;
+    padding-right: 25%;
+}
+
+.form-connexion label{
+    Color: rgb(0, 0, 0);
+    height: 35px;
+    line-height: 35px;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.form-connexion input{
+    height: 30px;
+    margin-right: 15px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.btn-valide-form-connexion{
+    color: White;
+    background-color: rgb(59, 96, 218);
+    font-size: 16px;
+    line-height: 20px;
+    height: 35px;
+    width: 35px;
+}
+
+.menu_footer{
+    margin-top: 0px;
+}
+
+
+
+/* Gestion des décorations lors du rétrécissement de la fenêtre */
+@media (max-width:1600px){
+
+    #streets_deco, #rayman_deco, #starfox_deco{
+        width: 150px;
+    }
+
+}
+
+@media (max-width:1150px){
+
+    #streets_deco, #rayman_deco, #starfox_deco{
+        width: 100px;
+    }
+
+}
+
+@media (max-width:770px){
+
+    #streets_deco, #starfox_deco{
+        left: 1%;
+    }
+    
+    #rayman_deco{
+        left: 84%;
+    }
+}
+
+
+
+@media all and (max-width: 1000px){
+
+    .form-connexion{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .btn-valide-form-connexion{
+        margin-top: 20px;
+        margin-left: 40%;
+    }
+
+}
+
+/* Version Mobile */
+@media all and (max-width: 656px){
+
+    #section-1{
+        width: 100%;
+    }
+
+    #streets_deco, #rayman_deco, #starfox_deco{
+        display: none;
+    }
+
+    .conteneur-form-login{
+        padding-top: 75px;
+        padding-bottom: 75px;
+    }
+
+}
