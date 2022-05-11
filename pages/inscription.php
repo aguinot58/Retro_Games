@@ -90,6 +90,7 @@
 
         </main>
         <script src="./../js/inscription.js"></script>
+        <script src="./../js/index.js"></script>
     </body>
 </html>
 

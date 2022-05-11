@@ -60,5 +60,6 @@
             /* imporation du footer */
             include $lien.'pages/footer.php';
         ?>
+        <script src="./../js/index.js"></script>
     </body>
 </html>

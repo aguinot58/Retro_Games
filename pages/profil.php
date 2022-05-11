@@ -164,5 +164,6 @@
         ?>
 
         <script src="./../js/verification.js"></script>
+        <script src="./../js/index.js"></script>
     </body>
 </html>

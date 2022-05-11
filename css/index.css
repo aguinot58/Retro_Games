@@ -4,6 +4,7 @@ html, body{
     padding: 0;
     margin: 0;
     background-color: bisque;
+    z-index: 1;
 }
 
 #megaman_deco{
@@ -139,7 +140,6 @@ html, body{
 
 
 footer{
-
     margin-top: 12px;
 }
 
@@ -190,7 +190,6 @@ footer{
     }
 
 }
-
 
 
 /* Version Mobile */

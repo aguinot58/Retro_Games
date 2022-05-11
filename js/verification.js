@@ -133,9 +133,6 @@ function data(data) {
     return text.trim("&");
 }
 
-
-
-
 function fetch_post(url, dataArray) {
 
     let dataObject = data(dataArray);

@@ -214,11 +214,110 @@ h1{
 
 }
 
+@media all and (max-width: 1620px){
+
+    #leonardo_deco{
+        width: 200px;
+        height: auto;
+        position: absolute;
+        left: 1%;
+        top: 10%;
+        transition: 0.55s ease;
+    }
+    
+    #dragon_ball_deco{
+        width: 200px;
+        height: auto;
+        position: absolute;
+        left: 85%;
+        top: 50%;
+        transition: 0.55s ease;
+    }
+    
+    #mario_kart_deco{
+        width: 150px;
+        height: auto;
+        position: absolute;
+        left: 2%;
+        top: 120%;
+        transition: 0.55s ease;
+    }
+
+}
+
+
+@media all and (max-width: 1320px){
+
+    #leonardo_deco{
+        width: 200px;
+        height: auto;
+        position: absolute;
+        left: 0%;
+        top: 10%;
+        transition: 0.55s ease;
+    }
+    
+    #dragon_ball_deco{
+        width: 175px;
+        height: auto;
+        position: absolute;
+        left: 85%;
+        top: 60%;
+        transition: 0.55s ease;
+    }
+    
+    #mario_kart_deco{
+        width: 150px;
+        height: auto;
+        position: absolute;
+        left: 2%;
+        top: 150%;
+        transition: 0.55s ease;
+    }
+
+}
+
 @media all and (max-width: 1142px){
 
     .log .conteneur-form:last-child{
         margin-top: 40px;
         margin-bottom: 80px;
+    }
+
+    #leonardo_deco{
+        width: 200px;
+        height: auto;
+        position: absolute;
+        left: -2%;
+        top: 10%;
+        transition: 0.55s ease;
+    }
+    
+    #dragon_ball_deco{
+        width: 175px;
+        height: auto;
+        position: absolute;
+        left: 84%;
+        top: 60%;
+        transition: 0.55s ease;
+    }
+    
+    #mario_kart_deco{
+        width: 150px;
+        height: auto;
+        position: absolute;
+        left: 0%;
+        top: 150%;
+        transition: 0.55s ease;
+    }
+
+}
+
+
+@media all and (max-width: 1000px){
+
+    #leonardo_deco, #dragon_ball_deco, #mario_kart_deco{
+        display: none;
     }
 
 }
