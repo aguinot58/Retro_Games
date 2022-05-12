@@ -18,7 +18,7 @@
     $email = valid_donnees($_POST["email"]);
 
     if (!empty($identifiant) && !empty($mdp) && !empty($conf_mdp) && !empty($email) && ($mdp === $conf_mdp) && 
-        preg_match("/^[A-Z]{1}[A-Za-z0-9]{6,39}$/", $identifiant) &&
+        preg_match("/^[A-Z]{1}[A-Za-z0-9]{6,39}$/", $identifiant) && (filter_var($email, FILTER_VALIDATE_EMAIL)) &&
         preg_match("/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$/", $mdp)) {
 
         try{

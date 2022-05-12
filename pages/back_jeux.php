@@ -350,7 +350,7 @@
                         fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données - extraction liste jeux pour tableau. Erreur : " .$e);
                         fclose($fichier);
                             
-                        echo   '<article class="connexion-bdd-hs">
+                        echo   '<article class="container">
                                     <p>Une erreur est survenue lors de la connexion à la base de données.<br><br>
                                         Merci de rafraichir la page, et si le problème persiste, de réessayer ultérieurement.   </p>
                                 </article>';

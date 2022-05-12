@@ -262,10 +262,10 @@
         fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données - Erreur : " .$e);
         fclose($fichier);
                                 
-        echo   '<article class="connexion-bdd-hs">
-                            <p>Une erreur est survenue lors de la connexion à la base de données.<br><br>
-                            Merci de rafraichir la page, et si le problème persiste, de réessayer ultérieurement.   </p>
-                        </article>';
+        echo   '<article class="container">
+                    <p>Une erreur est survenue lors de la connexion à la base de données.<br><br>
+                    Merci de rafraichir la page, et si le problème persiste, de réessayer ultérieurement.   </p>
+                </article>';
         }
 
     }else{
