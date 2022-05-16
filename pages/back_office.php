@@ -90,14 +90,13 @@
         </header>
 
         <main class="flex-shrink-0">
-            <div class="container">
+            <div class="container pt-5">
                 <div class="col mt-5">
-                    <a class="liens" href="./../pages/back_consoles.php">
+                    <a class="text-decoration-none text-dark" href="./../pages/back_consoles.php">
                         <div class="card">
                             <div class="row g-0">
                                 <div class="col-md-4">
                                 <img class="bd-placeholder-img" src="./../img/retrogaming-console-cover.jpg" width="100%" height="250" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
-
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -110,12 +109,11 @@
                     </a>
                 </div>
                 <div class="col mt-4 mb-4">
-                    <a class="liens" href="./../pages/back_jeux.php">
+                    <a class="text-decoration-none text-dark" href="./../pages/back_jeux.php">
                         <div class="card">
                             <div class="row g-0">
                                 <div class="col-md-4">
                                     <img class="bd-placeholder-img" src="./../img/collection_jeux_retro.jpg" width="100%" height="250" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
-
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -130,12 +128,11 @@
                 <?php 
                     if ($_SESSION['niv_admin'] == 3){
                         echo '<div class="col mt-4 mb-4">
-                            <a class="liens" href="./../pages/back_utilisateurs.php"> 
+                            <a class="text-decoration-none text-dark" href="./../pages/back_utilisateurs.php"> 
                                 <div class="card">
                                     <div class="row g-0">
                                         <div class="col-md-4">
                                         <img class="bd-placeholder-img" src="./../img/silhouette.png" width="100%" height="250" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
-
                                         </div>
                                         <div class="col-md-8">
                                             <div class="card-body">
@@ -150,12 +147,11 @@
                     }
                 ?>
                 <div class="col mt-4 mb-5">
-                    <a class="liens" href="./../pages/back_msg.php">
+                    <a class="text-decoration-none text-dark" href="./../pages/back_msg.php">
                         <div class="card">
                             <div class="row g-0">
                                 <div class="col-md-4">
                                     <img class="bd-placeholder-img" src="./../img/message.png" width="100%" height="250" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
-
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">

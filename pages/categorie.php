@@ -31,6 +31,10 @@ $curPageName = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/
     <body>
         
         <?php
+
+            echo '<img id="megaman_deco" src="'.$lien.'img/megaman_deco.png" alt="Mega Man">';
+            echo '<img id="sonic_deco" src="'.$lien.'img/sonic_deco.png" alt="Sonic">';
+            echo '<img id="snake_deco" src="'.$lien.'img/snake_deco.png" alt="Solid Snake">';
             /* importation header */
             include $lien.'pages/header.php';
             
@@ -52,64 +56,116 @@ $curPageName = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/
                     $sth->bindParam(':nom_console', $nom_console);
                     $sth->execute();
                     //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
-                    $categorie = $sth->fetchColumn();
+                    $consoles = $sth->fetchColumn();
 
                     $sth = $conn->prepare("SELECT * FROM categories where Id_cat=:categorie");
                     $sth->bindParam(':categorie', $categorie);
                     $sth->execute();
                     //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
-                    $consoles = $sth->fetchAll(PDO::FETCH_ASSOC);
+                    $categorie= $sth->fetchAll(PDO::FETCH_ASSOC);
+
+                    $sth = $conn->prepare("SELECT Logo_cat, Img_cat FROM categories where Id_cat=$consoles");
+                    $sth->execute();
+                    $logos = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+                    foreach($logos as $logo){
                     ?>
 
+                  
+
                     <div class="meuble">
-                            <div class="console_ici">    
-                                <div class="console_logo">
-                                    <div class="tele_logo">
-                                        <img class="tele" src="../img/télé2.png">
-                                        <img class="logo" src="../img/snes_logo.png" alt="Logo_super_nintendo">
-                                    </div>
-                                    <img class="console" src="../img/snes_console.png" alt="console_super_nintendo">
+                        <div class="console_ici">    
+                            <div class="console_logo">
+                                <div class="tele_logo">
+                                    <img class="tele" src="../img/télé2.png">
+                                    <img class="logo" src="../img/<?php echo $logo['Logo_cat'] ?>" alt="Logo_super_nintendo">
                                 </div>
-                                <div class="haut_meuble">
-                                    <p>bonjour</p>
-                                </div>
+                                <img class="console" src="../img/<?php echo $logo['Img_cat'] ?>" alt="console_super_nintendo">
                             </div>
-                            <div class="etagere">
-                                <ul class="jeux_etagere">
-                                    <li class="carte"><img src="../img/zelda_alttp_jackette.jpg" alt="jaquette_zelda"></li>
-                                    <li class="carte"><img src="../img/street_fighter_jackette.jpg" alt="jaquette_street_fighter_2"></li>
-                                    <li class="carte"><img src="../img/mario_world_jackette.jpg" alt="jaquette_super_mario_world"></li>
-                                    <li class="carte"><img src="../img/super_metroid_jackette.jpg" alt="jaquette_super_metroid"></li>
-                                </ul>
-                            </div>
-
-                        </div>
-
-
                     <?php
+                    }
+                    try{
 
-                    foreach ($consoles as $console){
-    
+                            $sth = $conn->prepare("SELECT COUNT(Id_jeux) FROM jeux WHERE Cat_jeux = $consoles and Etat_jeux = 1");
+                            $sth->execute();
+                            //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
+                            $nb_jeux_tot = $sth->fetchColumn();
+                                    
+                            echo    '<div class="haut_meuble">
+                                        <p>Nombre de jeux dans le catalogue : '.$nb_jeux_tot.'</p>
+                                    </div>';
+                            $nb_jeux_integre = 0;
+                            while ($nb_jeux_integre < $nb_jeux_tot) {
+
+                            //Sélectionne les valeurs dans les colonnes pour chaque entrée de la table
+                            $sth = $conn->prepare("SELECT Id_jeux, Nom_jeux, Img_jeux FROM jeux WHERE Cat_jeux = $consoles and Etat_jeux = 1");
+                            $sth->execute();
+                             //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
+                            $jeux = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+                            echo '<article class="log">';
+                                echo '<div class="etagere">';
+                                    echo '<ul class="jeux_etagere">';
+                             foreach ($jeux as $jeu) {
+
+                               
+                            
+                                     echo      ' <li class="carte"><img id='.$jeu['Id_jeux'].'  src="../img/'.$jeu['Img_jeux'].' " alt="jaquette'.$jeu['Nom_jeux'].' "" onclick="page_jeux(event)"></li>';
+                   ?>   
+                   
+                   <?php
+
+                    
+                            $nb_jeux_integre += 1;
+                                }
+                                    echo     '</ul>';
+                                echo'</div>'; 
+                        echo '</div>';
+                    echo'</div>';
+                            echo     '</article>';
+                            }
+                    ?>
+                    <?php
+                        
+                        $sth = null;
+                        $conn = null;            
+
+                    }
+                    catch(PDOException $e){
+
+                        date_default_timezone_set('Europe/Paris');
+                        setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
+                        $format1 = '%A %d %B %Y %H:%M:%S';
+                        $date1 = strftime($format1);
+                        $fichier = fopen('./../log/error_log_categorie.txt', 'c+b');
+                        fseek($fichier, filesize('./../log/error_log_categorie.txt'));
+                        fwrite($fichier, "\n\n" .$date1. " - Erreur import jeux. Erreur : " .$e);
+                        fclose($fichier);
+                        //Fermeture de la connexion à la base de données
+                        $sth = null;
+                        $conn = null;
                     }
 
-                    //Fermeture de la connexion à la base de données
-                    $sth = null;
-                    $conn = null;
-        
                 }
                 catch(PDOException $e){
 
                     date_default_timezone_set('Europe/Paris');
-                                            setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-                                            $format1 = '%A %d %B %Y %H:%M:%S';
-                                            $date1 = strftime($format1);
-                                            $fichier = fopen('./../log/error_log_categorie.txt', 'c+b');
-                                            fseek($fichier, filesize('./../log/error_log_categorie.txt'));
-                                            fwrite($fichier, "\n\n" .$date1. " - Erreur import jeux. Erreur : " .$e);
-                                            fclose($fichier);
+                    setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
+                    $format1 = '%A %d %B %Y %H:%M:%S';
+                    $date1 = strftime($format1);
+                    $fichier = fopen('./../log/error_log_categorie.txt', 'c+b');
+                    fseek($fichier, filesize('./../log/error_log_categorie.txt'));
+                    fwrite($fichier, "\n\n" .$date1. " - Erreur import jeux. Erreur : " .$e);
+                    fclose($fichier);
+                    //Fermeture de la connexion à la base de données
+                    $sth = null;
+                    $conn = null;
+                       
                 
-                }
-
+                    
+                }      
+                
+                
             }
             catch(PDOException $e){
                 echo "Erreur : " .$e->getMessage();
@@ -130,6 +186,7 @@ $curPageName = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/
 
                                         </article>';
             }
+            
             ?>
 
         <?php

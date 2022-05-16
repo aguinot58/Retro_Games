@@ -9,6 +9,33 @@ body{
     background-color: bisque;
 }
 
+#megaman_deco{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 2%;
+    top: 20%;
+    transition: 0.55s ease;
+}
+
+#sonic_deco{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 88%;
+    top: 75%;
+    transition: 0.55s ease;
+}
+
+#snake_deco{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 2%;
+    top: 120%;
+    transition: 0.55s ease;
+}
+
 .console_ici{
     display: flex;
     flex-direction: column;
@@ -29,7 +56,11 @@ body{
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    background-color: blue;
+   
+   
+}
+.haut_meuble p{
+    margin-top: 50px;
 }
 
 
@@ -62,6 +93,8 @@ body{
 .tele img{
     width: 500px
 }
+
+
 .meuble{
     display: flex;
     flex-direction: column;
@@ -95,29 +128,43 @@ body{
 }
 
 .jeux_etagere{
-    margin-left:50px ;
+    
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
    
     
 }
-.jeux img{
+.carte img{
+    margin-left:50px ;
     position: relative;
     display: flex;
-    
+     box-shadow: 15px -10px 10px 0px rgba(0, 0, 0, 0.55);
     
    
+}
+
+.carte img:hover{
+    cursor:pointer;
 }
 
 .carte{
     list-style: none;
     padding-left: 0px;
     Width: 250px;
-    box-shadow: 15px -10px 10px 0px rgba(0, 0, 0, 0.55);
+   
     margin-bottom: 40px;
     margin-left: 25px;
     margin-right: 25px;
+}
+
+@media (max-width:1600px){
+
+    #megaman_deco, #sonic_deco, #snake_deco,
+    #megaman_deco2, #sonic_deco2, #snake_deco2{
+        width: 150px;
+    }
+
 }
 
 
@@ -125,8 +172,19 @@ body{
     .console{
         margin-bottom: 10px;
     }
+
+    #megaman_deco, #sonic_deco, #snake_deco,
+    #megaman_deco2, #sonic_deco2, #snake_deco2{
+        width: 100px;
+    }
     .jeux_etagere{
         margin-bottom: 20px;
+    }
+    .tele{
+        margin-bottom: 10px;
+    }
+    p {
+      margin-bottom: -20px;
     }
 }
 
