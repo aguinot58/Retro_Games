@@ -150,8 +150,7 @@
                                 </article>';
 
                         }
-
-                echo   '</section>';
+                echo    '</section>';
 
             } else {
 

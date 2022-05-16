@@ -28,6 +28,8 @@
                 $sth = null;
                 $conn = null;
 
+                $_SESSION['suppr_jeu'] = true;
+
                 echo 'suppression reussie';
 
             }

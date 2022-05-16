@@ -91,12 +91,12 @@
 
         <main class="flex-shrink-0">
             <div class="container pt-5">
-                <div class="col mt-5">
+                <div class="col mt-5 mx-auto">
                     <a class="text-decoration-none text-dark" href="./../pages/back_consoles.php">
-                        <div class="card">
+                        <div class="card shadow p-3 mb-5 bg-white rounded w-75 mx-auto">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                <img class="bd-placeholder-img" src="./../img/retrogaming-console-cover.jpg" width="100%" height="250" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
+                                <img class="bd-placeholder-img img-fluid" src="./../img/retrogaming-console-cover.jpg" width="100%" height="250" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -108,12 +108,12 @@
                         </div>
                     </a>
                 </div>
-                <div class="col mt-4 mb-4">
+                <div class="col mt-4 mb-4 mx-auto">
                     <a class="text-decoration-none text-dark" href="./../pages/back_jeux.php">
-                        <div class="card">
+                        <div class="card shadow p-3 mb-5 bg-white rounded w-75 mx-auto">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img class="bd-placeholder-img" src="./../img/collection_jeux_retro.jpg" width="100%" height="250" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
+                                    <img class="bd-placeholder-img img-fluid" src="./../img/collection_jeux_retro.jpg" width="100%" height="250" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -125,14 +125,31 @@
                         </div>
                     </a>
                 </div>
+                <div class="col mt-4 mb-5">
+                    <a class="text-decoration-none text-dark" href="./../pages/back_msg.php">
+                        <div class="card shadow p-3 mb-5 bg-white rounded w-75 mx-auto">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img class="bd-placeholder-img img-fluid" src="./../img/message.png" width="100%" height="250" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Messages</h5>
+                                        <p class="card-text">Ici vous pouvez consulter, répondre ou supprimer les messages transmis par les utilisateurs.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
                 <?php 
                     if ($_SESSION['niv_admin'] == 3){
-                        echo '<div class="col mt-4 mb-4">
+                        echo '<div class="col mt-4 mb-4 mx-auto">
                             <a class="text-decoration-none text-dark" href="./../pages/back_utilisateurs.php"> 
-                                <div class="card">
+                                <div class="card shadow p-3 mb-5 bg-white rounded w-75 mx-auto">
                                     <div class="row g-0">
                                         <div class="col-md-4">
-                                        <img class="bd-placeholder-img" src="./../img/silhouette.png" width="100%" height="250" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
+                                        <img class="bd-placeholder-img img-fluid" src="./../img/silhouette.png" width="100%" height="250" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
                                         </div>
                                         <div class="col-md-8">
                                             <div class="card-body">
@@ -146,23 +163,6 @@
                         </div>';
                     }
                 ?>
-                <div class="col mt-4 mb-5">
-                    <a class="text-decoration-none text-dark" href="./../pages/back_msg.php">
-                        <div class="card">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img class="bd-placeholder-img" src="./../img/message.png" width="100%" height="250" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Messages</h5>
-                                        <p class="card-text">Ici vous pouvez consulter, répondre ou supprimer les messages transmis par les utilisateurs.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
             </div>
         </main>
 

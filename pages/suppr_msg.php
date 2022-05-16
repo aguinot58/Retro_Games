@@ -38,6 +38,10 @@
             $sth = null;
             $conn = null;
 
+            $_SESSION['suppr_msg'] = true;
+
+            header("Location:./../pages/back_msg.php");
+
         }
         catch(PDOException $e){
                             

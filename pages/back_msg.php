@@ -10,6 +10,45 @@
         $_SESSION['admin'] = 'non';
     }
 
+    if (!isset($_SESSION['suppr_msg'])){
+        $_SESSION['suppr_msg'] = false;
+    }
+
+    if ($_SESSION['suppr_msg']== true){
+        ?>
+            <script type="text/javascript">
+                alert ("Message supprimé avec succès !");
+            </script>
+        <?php
+        $_SESSION['suppr_msg']= false;
+    }
+
+    if (!isset($_SESSION['suppr_rep'])){
+        $_SESSION['suppr_rep'] = false;
+    }
+
+    if ($_SESSION['suppr_rep']== true){
+        ?>
+            <script type="text/javascript">
+                alert ("Réponse supprimée avec succès !");
+            </script>
+        <?php
+        $_SESSION['suppr_rep']= false;
+    }
+
+    if (!isset($_SESSION['envoi_rep'])){
+        $_SESSION['envoi_rep'] = false;
+    }
+
+    if ($_SESSION['envoi_rep']== true){
+        ?>
+            <script type="text/javascript">
+                alert ("Réponse envoyée avec succès !");
+            </script>
+        <?php
+        $_SESSION['envoi_rep']= false;
+    }
+
     $curPageName = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
 
     if ($curPageName == "index.php") {
@@ -106,8 +145,8 @@
 
                 if ($_SESSION['logged'] == 'oui' && $_SESSION['admin'] = 'oui') {
 
-                    echo '<div class="container mb-2">
-                            <h3 class="mt-3 mb-4">Liste des messages</h3>';
+                    echo '<div class="container mb-2 table-responsive">
+                            <h3 class="mt-5 mb-4">Liste des messages</h3>';
 
                     /* Connexion à une base de données en PDO */
                     $configs = include($lien.'pages/config.php');
@@ -195,13 +234,13 @@
 
                                 <div class="container mb-5">
                                     <div class="row mb-3">
-                                        <div class="d-flex col-12 justify-content-between">
-                                            <h3 class="col-8">Liste des réponses</h3>
-                                            <input type="text" class="form-control text-center ms-5" id="filtre_id_rep" name="filtre_id_rep" onchange="chargement_rep()" value="0">
-                                            <label class="label ms-2 col-2">Recherche par n°id_msg <br> 0 = tous</label>
+                                        <div class="d-flex input-group mb-3 justify-content-between">
+                                            <h3 class="col-10">Liste des réponses</h3>
+                                            <div class="input-group-prepend"><span class="input-group-text" id="inputGroup">Rech. n°Id</span></div>
+                                            <input type="text" class="form-control" title="0 = tous les messages" aria-label="Groupe d input de taille normale" aria-describedby="inputGroup">
                                         </div>
 
-                                        <div class="modal-body" id="affichage_modal_reponse">
+                                        <div class="modal-body table-responsive" id="affichage_modal_reponse">
 
 
                                         </div>

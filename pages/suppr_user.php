@@ -49,6 +49,8 @@
             $sth = null;
             $conn = null;
 
+            $_SESSION['suppr_user'] = true;
+
             if(!empty($_POST) && array_key_exists("id_user", $_POST)){
                 header("Location:./../pages/back_utilisateurs.php");
             } else {

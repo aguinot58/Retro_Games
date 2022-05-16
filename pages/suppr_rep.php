@@ -29,14 +29,39 @@
 
         try{
 
-            //On efface les données reçues dans la table messages
+            // on extrait l'id du message de la réponse concernée
+            $sth = $conn4->prepare("SELECT Id_msg FROM reponses where Id_rep = :id_rep");
+            $sth->bindParam(':id_rep', $id_rep);
+            $sth->execute();
+            $id_msg = $sth->fetchColumn();
+
+            //On efface les données reçues dans la table reponses
             $sth = $conn->prepare("DELETE FROM reponses WHERE Id_rep = :id_rep"); 
             $sth->bindParam(':id_rep', $id_rep);
             $sth->execute();
 
+            // on vérifie si il reste d'autre réponses à ce message dans la table
+            $sth = $conn4->prepare("SELECT COUNT(Id_rep) as nb_rep FROM reponses where Id_msg = :id_msg");
+            $sth->bindParam(':id_msg', $id_msg);
+            $sth->execute();
+            $id_msg = $sth->fetchColumn();
+
+            if ($id_msg == 0) {
+                // si il n'y a plus de réponse pour ce message, on vient mettre à jour le champs indiquant 
+                // qu'une réponse a été faites dans la table messages 
+
+                $sth = $conn->prepare("UPDATE messages set Rep_eff_msg = 0 WHERE Id_msg = :id_msg"); 
+                $sth->bindParam(':id_msg', $id_msg);
+                $sth->execute();
+            }
+
             /*Fermeture de la connexion à la base de données*/
             $sth = null;
             $conn = null;
+
+            $_SESSION['suppr_rep'] = true;
+
+            header("Location:./../pages/back_msg.php");
 
         }
         catch(PDOException $e){

@@ -55,6 +55,8 @@
                 $sth = null;
                 $conn = null;
 
+                $_SESSION['modif_user'] = true;
+
                 //On renvoie l'utilisateur vers la page d'administration des utilisateurs
                 header("Location:./../pages/back_utilisateurs.php");
 

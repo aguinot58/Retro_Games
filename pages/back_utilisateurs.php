@@ -10,6 +10,32 @@
         $_SESSION['admin'] = 'non';
     }
 
+    if (!isset($_SESSION['suppr_user'])){
+        $_SESSION['suppr_user'] = false;
+    }
+
+    if ($_SESSION['suppr_user']== true){
+        ?>
+            <script type="text/javascript">
+                alert ("Utilisateur supprimé avec succès !");
+            </script>
+        <?php
+        $_SESSION['suppr_user']= false;
+    }
+
+    if (!isset($_SESSION['modif_user'])){
+        $_SESSION['modif_user'] = false;
+    }
+
+    if ($_SESSION['modif_user']== true){
+        ?>
+            <script type="text/javascript">
+                alert ("Utilisateur modifié avec succès !");
+            </script>
+        <?php
+        $_SESSION['modif_user']= false;
+    }
+
     $curPageName = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
 
     if ($curPageName == "index.php") {
@@ -106,8 +132,8 @@
 
                 if ($_SESSION['logged'] == 'oui' && $_SESSION['admin'] = 'oui' && $niv_admin==3) {
 
-                    echo '<div class="container mb-5">
-                            <h3 class="mt-3 mb-4">Liste des utilisateurs</h3>';
+                    echo '<div class="container mb-5 table-responsive">
+                            <h3 class="mt-5 mb-4">Liste des utilisateurs</h3>';
 
                     /* Connexion à une base de données en PDO */
                     $configs = include($lien.'pages/config.php');

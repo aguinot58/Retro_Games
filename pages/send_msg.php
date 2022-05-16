@@ -102,7 +102,7 @@
                 //$headers .= 'Bcc: '.$copie_cachee."\n\n"; // Copie cachée Bcc  
 
                 // envoi du mail
-                if (mail($destinataire, $objet, $msg_rep, $headers)){
+                if (mail($destinataire, $objet_rep, $msg_rep, $headers)){
 
                     // envoi réussi, on fait le commit de nos modifications des tables reponses et messages
                     $conn4->commit();
@@ -110,6 +110,8 @@
                     /*Fermeture de la connexion à la base de données*/
                     $sth = null;
                     $conn4 = null;
+
+                    $_SESSION['envoi_rep'] = true;
 
                     //On renvoie l'utilisateur vers la page d'administration des messages
                     header("Location:./../pages/back_msg.php");

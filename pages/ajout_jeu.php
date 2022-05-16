@@ -100,6 +100,8 @@
                         break;
                 }
 
+                $_SESSION['ajout_jeu'] = true;
+
                 //On renvoie l'utilisateur vers la page d'administration des jeux
                 header("Location:./../pages/back_jeux.php");
 

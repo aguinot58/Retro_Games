@@ -10,6 +10,45 @@
         $_SESSION['admin'] = 'non';
     }
 
+    if (!isset($_SESSION['suppr_jeu'])){
+        $_SESSION['suppr_jeu'] = false;
+    }
+
+    if ($_SESSION['suppr_jeu']== true){
+        ?>
+            <script type="text/javascript">
+                alert ("Jeu supprimé avec succès !");
+            </script>
+        <?php
+        $_SESSION['suppr_jeu']= false;
+    }
+
+    if (!isset($_SESSION['modif_jeu'])){
+        $_SESSION['modif_jeu'] = false;
+    }
+
+    if ($_SESSION['modif_jeu']== true){
+        ?>
+            <script type="text/javascript">
+                alert ("Jeu modifié avec succès !");
+            </script>
+        <?php
+        $_SESSION['modif_jeu']= false;
+    }
+
+    if (!isset($_SESSION['ajout_jeu'])){
+        $_SESSION['ajout_jeu'] = false;
+    }
+
+    if ($_SESSION['ajout_jeu']== true){
+        ?>
+            <script type="text/javascript">
+                alert ("Jeu ajouté avec succès !");
+            </script>
+        <?php
+        $_SESSION['ajout_jeu']= false;
+    }
+
     $curPageName = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
 
     if ($curPageName == "index.php") {
@@ -233,7 +272,7 @@
                     </div>
 
                     <!-- liste des jeux en fonction du niveau d\'admin -->
-                    <div class="container mb-5">
+                    <div class="container mb-5 table-responsive">
                         <h3 class="mt-3 mb-4">Liste des jeux</h3>';
 
                         /* Connexion à une base de données en PDO */

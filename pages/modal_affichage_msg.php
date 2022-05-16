@@ -82,9 +82,9 @@
                                         <label for="rep_eff_msg" class="form-label">Réponse effectuée : </label>';
 
                                         if ($message['Rep_eff_msg']==0) {
-                                            echo '<label class="form-label">Non</label>';
+                                            echo '<label class="form-label ms-1">Non</label>';
                                         } else {
-                                            echo '<label class="form-label">Oui</label>';
+                                            echo '<label class="form-label ms-1">Oui</label>';
                                         }
 
                     echo '              <input type="text" class="form-control d-none" id="rep_eff_msg" name="rep_eff_msg" value="'.$message['Rep_eff_msg'].'">
