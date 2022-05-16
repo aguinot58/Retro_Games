@@ -50,7 +50,7 @@
             }
         }
         </style>
-        <link rel="stylesheet" href="./../css/back_office.css"/>
+        <link rel="stylesheet" href="./../css/back.css"/>
     
     </head>
 
@@ -76,9 +76,14 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link active" href="./../pages/back_jeux.php">Jeux</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link active" href="./../pages/back_utilisateurs.php">Utilisateurs</a>
+                                        </li>';
+                                        if ($_SESSION['niv_admin'] == 3){
+                                            echo '<li class="nav-item">
+                                                <a class="nav-link active" href="./../pages/back_utilisateurs.php">Utilisateurs</a>
+                                            </li>';
+                                        }
+                                echo   '<li class="nav-item">
+                                            <a class="nav-link active" href="./../pages/back_msg.php">Messages</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link active" href="./../pages/logout.php">Déconnexion</a>
@@ -268,15 +273,15 @@
                                 echo '<table class="table table-striped" id="tableau_jeu">
                                         <thead>
                                         <tr>
-                                            <th scope="col">Id</th>
-                                            <th scope="col">Nom</th>
-                                            <th scope="col">Cat.</th>
-                                            <th scope="col">Développeur.</th>
-                                            <th scope="col">Editeur</th>
-                                            <th scope="col">Dte Sortie</th>
-                                            <th scope="col">Img</th>
-                                            <th scope="col">Visible</th>
-                                            <th scope="col">Outils</th>
+                                            <th scope="col" class="text-center text-nowrap">Id <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                            <th scope="col" class="text-center text-nowrap">Nom <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                            <th scope="col" class="text-center text-nowrap">Cat. <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                            <th scope="col" class="text-center text-nowrap">Développeur <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                            <th scope="col" class="text-center text-nowrap">Editeur <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                            <th scope="col" class="text-center text-nowrap">Dte Sortie <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                            <th scope="col" class="text-center text-nowrap">Img <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                            <th scope="col" class="text-center text-nowrap">Visible <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                            <th scope="col" class="text-center text-nowrap">Outils</th>
                                         </tr>
                                         </thead>
                                         <tbody>';
@@ -289,15 +294,15 @@
                                     $date_bon_format = date("d-m-Y", $timestamp );
 
                                     echo '<tr>
-                                            <th scope="row">'.$jeu['Id_jeux'].'</th>
-                                            <td>'.$jeu['Nom_jeux'].'</td>
-                                            <td>'.$jeu['Cat_jeux'].'</td>
-                                            <td>'.$jeu['Dev_jeux'].'</td>
-                                            <td>'.$jeu['Editeur_jeux'].'</td>
-                                            <td>'.$date_bon_format.'</td>
-                                            <td>'.$jeu['Img_jeux'].'</td>
-                                            <td>'.$jeu['Etat_jeux'].'</td>
-                                            <td >
+                                            <th scope="row" class="align-middle text-center">'.$jeu['Id_jeux'].'</th>
+                                            <td class="align-middle text-center">'.$jeu['Nom_jeux'].'</td>
+                                            <td class="align-middle text-center">'.$jeu['Cat_jeux'].'</td>
+                                            <td class="align-middle text-center">'.$jeu['Dev_jeux'].'</td>
+                                            <td class="align-middle text-center">'.$jeu['Editeur_jeux'].'</td>
+                                            <td class="align-middle text-center">'.$date_bon_format.'</td>
+                                            <td class="align-middle text-center">'.$jeu['Img_jeux'].'</td>
+                                            <td class="align-middle text-center">'.$jeu['Etat_jeux'].'</td>
+                                            <td class="align-middle text-center">
                                                 <div class="d-flex flex-row">
                                                     <div>
                                                         <button type="button" class="btn open_modal" data-id="'.$jeu['Id_jeux'].'" name="mod_'.$jeu['Id_jeux'].'">
@@ -377,6 +382,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="./../js/back_jeux.js"></script> 
+        <script src="./../js/tri_tableau.js"></script> 
     </body>
     
 </html>
@@ -391,7 +397,7 @@
         <h5 class="modal-title" id="exampleModalLabel">Modification d'un jeu</h5>
       </div>
       <div class="modal-body" id="affichage_modal">
-            <!-- affichage des deonnées depuis le fetch en js -->
+            <!-- affichage des données depuis le fetch en js -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>

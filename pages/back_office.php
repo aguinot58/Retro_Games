@@ -78,6 +78,9 @@
                                 }
                             ?>
                             <li class="nav-item">
+                                <a class="nav-link active" href="./../pages/back_msg.php">Messages</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link active" href="./../pages/logout.php">Déconnexion</a>
                             </li>
                         </ul>
@@ -126,7 +129,7 @@
                 </div>
                 <?php 
                     if ($_SESSION['niv_admin'] == 3){
-                        echo '<div class="col mb-5">
+                        echo '<div class="col mt-4 mb-4">
                             <a class="liens" href="./../pages/back_utilisateurs.php"> 
                                 <div class="card">
                                     <div class="row g-0">
@@ -146,6 +149,24 @@
                         </div>';
                     }
                 ?>
+                <div class="col mt-4 mb-5">
+                    <a class="liens" href="./../pages/back_msg.php">
+                        <div class="card">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img class="bd-placeholder-img" src="./../img/message.png" width="100%" height="250" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
+
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Messages</h5>
+                                        <p class="card-text">Ici vous pouvez consulter, répondre ou supprimer les messages transmis par les utilisateurs.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
         </main>
 

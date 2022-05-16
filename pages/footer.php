@@ -17,6 +17,7 @@
                 </div>
                 <div class="copyright">
                     <p class="copyright texte-couleur-gris-bleu">Tous droits réservés @Retro-Games.com</p>
+                    <a href="'.$lien.'pages/form_contact.php"><p class="copyright texte-couleur-gris-bleu">Nous contacter</p>
                 </div>
             </div>
          </footer>';

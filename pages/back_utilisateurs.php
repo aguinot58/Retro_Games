@@ -50,7 +50,7 @@
             }
         }
         </style>
-        <link rel="stylesheet" href="./../css/back_office.css"/>
+        <link rel="stylesheet" href="./../css/back.css"/>
     
     </head>
 
@@ -76,9 +76,14 @@
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link active" href="./../pages/back_jeux.php">Jeux</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link active" href="./../pages/back_utilisateurs.php">Utilisateurs</a>
+                                        </li>';
+                                        if ($_SESSION['niv_admin'] == 3){
+                                            echo '<li class="nav-item">
+                                                <a class="nav-link active" href="./../pages/back_utilisateurs.php">Utilisateurs</a>
+                                            </li>';
+                                        }
+                                echo   '<li class="nav-item">
+                                            <a class="nav-link active" href="./../pages/back_msg.php">Messages</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link active" href="./../pages/logout.php">Déconnexion</a>
@@ -126,12 +131,12 @@
                             echo '<table class="table table-striped" id="tableau_user">
                                     <thead>
                                     <tr>
-                                        <th scope="col">Id</th>
-                                        <th scope="col">Identifiant</th>
-                                        <th scope="col">Mail</th>
-                                        <th scope="col">Niv Admin</th>
-                                        <th scope="col">Visible</th>
-                                        <th scope="col">Outils</th>
+                                        <th scope="col" class="text-center text-nowrap">Id <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                        <th scope="col" class="text-center text-nowrap">Identifiant <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                        <th scope="col" class="text-center text-nowrap">Mail <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                        <th scope="col" class="text-center text-nowrap">Niv Admin <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                        <th scope="col" class="text-center text-nowrap">Visible <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                        <th scope="col" class="text-center text-nowrap">Outils</th>
                                     </tr>
                                     </thead>
                                     <tbody>';
@@ -141,9 +146,9 @@
                             foreach ($users as $user) {
 
                                 echo '<tr>
-                                        <th class="align-middle" scope="row">'.$user['Id_user'].'</th>
-                                        <td class="align-middle">'.$user['Ident_user'].'</td>
-                                        <td class="align-middle">'.$user['Mail_user'].'</td>';
+                                        <th class="align-middle text-center" scope="row">'.$user['Id_user'].'</th>
+                                        <td class="align-middle text-center">'.$user['Ident_user'].'</td>
+                                        <td class="align-middle text-center">'.$user['Mail_user'].'</td>';
 
                                         $sth = $conn->prepare("SELECT Niv_Admin FROM admin WHERE Id_user=:id_user");
                                         $sth->bindParam(':id_user', $user['Id_user']);
@@ -151,9 +156,9 @@
                                         //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
                                         $niv_admin = $sth->fetchColumn();
 
-                                echo   '<td class="align-middle">'.$niv_admin.'</td>
-                                        <td class="align-middle">'.$user['Etat_user'].'</td>
-                                        <td class="align-middle">
+                                echo   '<td class="align-middle text-center">'.$niv_admin.'</td>
+                                        <td class="align-middle text-center">'.$user['Etat_user'].'</td>
+                                        <td class="align-middle text-center">
                                             <div class="d-flex flex-row">
                                                 <div>
                                                     <button type="button" class="btn open_modal" data-id="'.$user['Id_user'].'" name="mod_'.$user['Id_user'].'">
@@ -203,7 +208,7 @@
                     $date1 = strftime($format1);
                     $fichier = fopen('./../log/error_log_back_user.txt', 'c+b');
                     fseek($fichier, filesize('./../log/error_log_back_user.txt'));
-                    fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données - extraction liste jeux pour tableau. Erreur : " .$e);
+                    fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données - extraction liste utilisateurs pour tableau. Erreur : " .$e);
                     fclose($fichier);
                         
                     echo   '<article class="container">
@@ -235,6 +240,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="./../js/back_user.js"></script> 
+        <script src="./../js/tri_tableau.js"></script> 
     </body>
     
 </html>
@@ -247,7 +253,7 @@
         <h5 class="modal-title" id="exampleModalLabel">Modification d'un utilisateur</h5>
       </div>
       <div class="modal-body" id="affichage_modal">
-            <!-- affichage des deonnées depuis le fetch en js -->
+            <!-- affichage des données depuis le fetch en js -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>

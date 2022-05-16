@@ -44,6 +44,7 @@
             <img id="chrono_deco" src="./../img/chrono_deco.png" alt="Chrono de Chrono Trigger">
 
             <section id="section-1">
+                <img id="haut-etagere" src="./../img/shelf-header.jpg" alt="haut étagère">
                 <div class="non-log">
                     <div class="form-gauche">
                         <h4>Formulaire d'inscription</h4>

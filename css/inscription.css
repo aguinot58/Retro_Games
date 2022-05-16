@@ -41,7 +41,7 @@ html, body{
     margin-right: auto;
 }
 
-#section-1 .haut-etagere{
+#section-1 #haut-etagere{
     width: 100%;
 }
 
@@ -164,6 +164,13 @@ html, body{
 .formulaire-contact-champ label {
     margin: 0 0 12px;
 }
+
+.form-droite{
+    padding-top : 30px;
+}
+
+
+
 
 
 
