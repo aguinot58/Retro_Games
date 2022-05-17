@@ -188,14 +188,13 @@
                                 <div class="col">
                                     <label for="cat_jeux" class="form-label">Plate-forme</label>
                                     <select id="cat_jeux" class="form-select" name="cat_jeux" aria-label="Default select example">
-                                        <option selected>Choix</option>
-                                            <?php
+                                        <option selected>Choix</option>';
                                                 /* Connexion à une base de données en PDO */
-                                                $configs = include($lien.\'pages/config.php\');
-                                                $servername = $configs[\'servername\'];
-                                                $username = $configs[\'username\'];
-                                                $password = $configs[\'password\'];
-                                                $db = $configs[\'database\'];
+                                                $configs = include($lien.'pages/config.php');
+                                                $servername = $configs['servername'];
+                                                $username = $configs['username'];
+                                                $password = $configs['password'];
+                                                $db = $configs['database'];
                                                 //On établit la connexion
                                                 try{
                                                     $conn = new PDO("mysql:host=$servername;dbname=$db;charset=UTF8", $username, $password);
@@ -212,7 +211,7 @@
 
                                                         // on remplit la liste de sélection de console
                                                         foreach ($categories as $categorie) {
-                                                            echo \'<option value="\'.$categorie[\'Id_cat\'].\'">\'.$categorie[\'Nom_cat\'].\'</option>\';
+                                                            echo '<option value="'.$categorie['Id_cat'].'">'.$categorie['Nom_cat'].'</option>';
                                                         };
 
                                                         /*Fermeture de la connexion à la base de données*/
@@ -221,12 +220,12 @@
                                                     }
                                                     catch(PDOException $e){
                                 
-                                                        date_default_timezone_set(\'Europe/Paris\');
-                                                        setlocale(LC_TIME, [\'fr\', \'fra\', \'fr_FR\']);
-                                                        $format1 = \'%A %d %B %Y %H:%M:%S\';
+                                                        date_default_timezone_set('Europe/Paris');
+                                                        setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
+                                                        $format1 = '%A %d %B %Y %H:%M:%S';
                                                         $date1 = strftime($format1);
-                                                        $fichier = fopen(\'./../log/error_log_back_jeux.txt\', \'c+b\');
-                                                        fseek($fichier, filesize(\'./../log/error_log_back_jeux.txt\'));
+                                                        $fichier = fopen('./../log/error_log_back_jeux.txt', 'c+b');
+                                                        fseek($fichier, filesize('./../log/error_log_back_jeux.txt'));
                                                         fwrite($fichier, "\n\n" .$date1. " - Erreur import liste catégorie consoles. Erreur : " .$e);
                                                         fclose($fichier);
                             
@@ -239,22 +238,22 @@
                                                 *les informations relatives à celle-ci*/
                                                 catch(PDOException $e){
                                                 //echo "Erreur : " . $e->getMessage();
-                                                date_default_timezone_set(\'Europe/Paris\');
-                                                setlocale(LC_TIME, [\'fr\', \'fra\', \'fr_FR\']);
-                                                $format1 = \'%A %d %B %Y %H:%M:%S\';
+                                                date_default_timezone_set('Europe/Paris');
+                                                setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
+                                                $format1 = '%A %d %B %Y %H:%M:%S';
                                                 $date1 = strftime($format1);
-                                                $fichier = fopen(\'./../log/error_log_back_jeux.txt\', \'c+b\');
-                                                fseek($fichier, filesize(\'./../log/error_log_back_jeux.txt\'));
+                                                $fichier = fopen('./../log/error_log_back_jeux.txt', 'c+b');
+                                                fseek($fichier, filesize('./../log/error_log_back_jeux.txt'));
                                                 fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données - remplissage select ajout jeux. Erreur : " .$e);
                                                 fclose($fichier);
                             
-                                                echo   \'<article class="connexion-bdd-hs">
+                                                echo   '<article class="connexion-bdd-hs">
                                                             <p>Une erreur est survenue lors de la connexion à la base de données.<br><br>
                                                                 Merci de rafraichir la page, et si le problème persiste, de réessayer ultérieurement.   </p>
-                                                        </article>\';
+                                                        </article>';
                                                 }
-                                            ?>
-                                    </select>
+                                            
+                        echo       '</select>
                                 </div>
                             </div>
                             <!-- Bouton d\'ajout -->

@@ -79,7 +79,7 @@
 
                                 $nb_jeux_integre = 0;
 
-                                while ($nb_jeux_integre < $nb_jeux_tot) {
+                                /*while ($nb_jeux_integre < $nb_jeux_tot) {
 
                                     //Sélectionne les valeurs dans les colonnes pour chaque entrée de la table
                                     $sth = $conn->prepare("SELECT Id_jeux, Nom_jeux, Img_jeux FROM jeux WHERE Etat_jeux = 1 ORDER BY Id_jeux ASC LIMIT $nb_jeux_integre, 4");
@@ -104,7 +104,60 @@
 
                                     echo '</article>';
 
-                                }
+                                }*/
+
+                                $page = (!empty($_GET['page']) ? $_GET['page'] : 1);
+                                $limite = 12;
+                                $debut = ($page - 1) * $limite;
+                                $nombreDePages = ceil($nb_jeux_tot / $limite);
+
+                                $sth = $conn->prepare('SELECT * FROM jeux WHERE Etat_jeux = 1 ORDER BY Id_jeux LIMIT :limite OFFSET :debut');
+                                $sth->bindValue('limite', $limite, PDO::PARAM_INT);
+                                $sth->bindValue('debut', $debut, PDO::PARAM_INT); 
+                                $sth->execute();
+                                //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
+                                $jeux = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+                                foreach ($jeux as $jeu) {
+
+                                    if ($nb_jeux_integre % 4 == 0 || $nb_jeux_integre == 0) {
+                                        echo '<article class="log">';
+                                    }
+  
+                                    echo    '<article class="carte">
+                                                <figure>
+                                                    <img id="'.$jeu['Id_jeux'].'" title="' .$jeu['Nom_jeux']. '" src="'.$lien.'img/' .$jeu['Img_jeux']. '" alt="Image '.$jeu['Nom_jeux'].'" onclick="page_jeux(event)">
+                                                </figure>
+                                            </article>';
+
+                                    $nb_jeux_integre += 1;
+
+                                    if ($nb_jeux_integre % 4 == 0 || $nb_jeux_integre == ($nb_jeux_tot-$debut)) {
+                                        echo '</article>';
+                                    }
+
+                                };
+
+                                echo '<div class="pagination">';
+                                    if ($page > 1):
+                                        ?><a href="?page=<?php echo $page - 1; ?>">Page précédente</a> — <?php
+                                    endif;
+                                    
+                                    /* On va effectuer une boucle autant de fois que l'on a de pages */
+                                    for ($i = 1; $i <= $nombreDePages; $i++):
+                                        if ($i==$page){
+                                            ?><a href="?page=<?php echo $i; ?>"><?php echo '<span class="page_active">'.$i.'</span>'; ?></a> <?php
+                                        } else {
+                                            ?><a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a> <?php
+                                        }
+                                    endfor;
+                                    
+                                    /* Avec le nombre total de pages, on peut aussi masquer le lien
+                                    * vers la page suivante quand on est sur la dernière */
+                                    if ($page < $nombreDePages):
+                                        ?>— <a href="?page=<?php echo $page + 1; ?>">Page suivante</a><?php
+                                    endif;
+                                echo '</div>';
 
                                 //Fermeture de la connexion à la base de données
                                 $sth = null;
