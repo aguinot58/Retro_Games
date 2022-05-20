@@ -102,20 +102,20 @@
                 if ($_SESSION['img_jeu_modif'] == 'oui') {
 
                     // chemin complet de la jaquette choisie par l'utilisateur
-                    $file = $_FILES['img_jeux']['tmp_name'];
+                    $file = $_FILES['img_jeux2']['tmp_name'];
 
                     // dossier de sauvegarde de l'image après traitement
                     $folder_save = "./../img/";
 
                     switch ($cat_jeu) {
                         case 1: // super nintendo
-                            modifier_image($file, $_FILES['img_jeux']['name'], $folder_save, 266, 194);
+                            modifier_image($file, $_FILES['img_jeux2']['name'], $folder_save, 266, 194);
                             break;
                         case 2: // megadrive
-                            modifier_image($file, $_FILES['img_jeux']['name'], $folder_save, 196, 266);
+                            modifier_image($file, $_FILES['img_jeux2']['name'], $folder_save, 196, 266);
                             break;
                         case 3: // playstation
-                            modifier_image($file, $_FILES['img_jeux']['name'], $folder_save, 266, 266);
+                            modifier_image($file, $_FILES['img_jeux2']['name'], $folder_save, 266, 266);
                             break;
                     }
                 }else{

@@ -71,13 +71,14 @@ function Modif_contenu_page(){
 
     if ((tbl_class_IF.indexOf('d-none') > -1) == true){
 
-        document.getElementById('input_file').setAttribute ("class", "row");
+        document.getElementById('input_file').setAttribute ("class", "d-flex row");
         document.getElementById('input_text').setAttribute ("class", "d-none row");
+        document.getElementById('img_jeux3').value = "";
 
     } else {
 
         document.getElementById('input_file').setAttribute ("class", "d-none row");
-        document.getElementById('input_text').setAttribute ("class", "row");
+        document.getElementById('input_text').setAttribute ("class", "d-flex row");
 
     }
 
@@ -167,16 +168,6 @@ function Suppr_jeu(event){
     fetch_post('./suppr_jeu.php', donnees).then(function(response) {
 
         if(response=='suppression reussie'){
-
-            /*var oElem = event.target.parentNode;
-
-            while( oElem && oElem.tagName != 'TR'){
-                oElem = oElem.parentNode;
-            }
-            if( oElem){
-                oElem.parentNode.removeChild( oElem);
-                alert('Jeu supprimé !');
-            }*/
 
             alert('Jeu supprimé !');
             window.location.href = "back_jeux.php";

@@ -207,11 +207,11 @@
 
             } else {
 
-                echo '<img id="megaman_deco2" src="'.$lien.'img/megaman_deco.png" alt="Mega Man">';
-                echo '<img id="sonic_deco2" src="'.$lien.'img/sonic_deco.png" alt="Sonic">';
-                echo '<img id="snake_deco2" src="'.$lien.'img/snake_deco.png" alt="Solid Snake">';
+                echo '<img id="megaman_deco2" src="'.$lien.'img/megaman_deco.png" alt="Mega Man">
+                        <img id="sonic_deco2" src="'.$lien.'img/sonic_deco.png" alt="Sonic">
+                        <img id="snake_deco2" src="'.$lien.'img/snake_deco.png" alt="Solid Snake">
 
-                echo '<section id="section-1">
+                    <section id="section-1">
                         <img class="haut-etagere" src="'.$lien.'img/shelf-header.jpg" alt="haut étagère">
                         <article class="non-log">
                             <h3>Bienvenue sur Retro-Games.com</h3>

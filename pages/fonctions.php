@@ -33,7 +33,7 @@
                 imagepng($filename,$new_name);
             }
             elseif( $type == IMAGETYPE_JPG ) {
-                imagegif($filename, $new_name);
+                imagejpeg($filename, $new_name);
             }
             imagedestroy($filename);
         }
@@ -95,6 +95,12 @@
             header('Content-Type: '.$type);
             save_image(image_resize($filename, $width_max, $height_max), $folder_save . DIRECTORY_SEPARATOR . $name_file_save, $type);
         }
+    }
+
+    function sauvegarder_image($filename, $name_file_save, $folder_save) {
+
+        move_uploaded_file($filename, "$folder_save/$name_file_save");
+
     }
 
 ?>

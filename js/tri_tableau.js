@@ -4,8 +4,6 @@
 // on accède aux différentes parties de notre tableau
 const tbody = document.querySelector('tbody');
 const thx = document.querySelectorAll('th');
-const trxb = tbody.querySelectorAll('tr');
-
 
 // écouteur d'évènement sur toutes les têtes de colonne du tableau
 thx.forEach(function(th) { 
@@ -41,6 +39,8 @@ thx.forEach(function(th) {
             utilisée pour le tri ainsi qu’un booléen qui va nous permettre d’inverser le tri (croissant / décroissant) à chaque fois qu’un élément 
             d’en-tête sera cliqué (note : par simplicité, les éléments d’en-tête agissent comme un groupe ici et non pas indépendamment).
         */
+        const trxb = tbody.querySelectorAll('tr');
+
         let classe = Array.from(trxb).sort(compare(Array.from(thx).indexOf(th), this.asc = !this.asc));
 
         classe.forEach(tr => tbody.appendChild(tr));
@@ -77,17 +77,19 @@ const compare = function(ids, asc){
     return function(row1, row2){
 
         const tdValue = function(row, ids){
+
             return row.children[ids].textContent;
         }
 
         const tri = function(v1, v2){
+            
             if (v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2)){
                return v1 - v2;
             }
             else {
                return v1.toString().localeCompare(v2);
             }
-            return v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2);
+            //return v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2);
         };
 
         return tri(tdValue(asc ? row1 : row2, ids), tdValue(asc ? row2 : row1, ids));

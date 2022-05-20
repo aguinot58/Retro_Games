@@ -290,7 +290,12 @@
 
                                 if ($niv_admin==3){
 
-                                    $sth = $conn->prepare("SELECT * FROM jeux");
+                                    $sth = $conn->prepare("SELECT COUNT(Id_jeux) FROM jeux WHERE Etat_jeux = 1");
+                                    $sth->execute();
+                                    //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
+                                    $nb_jeux_tot = $sth->fetchColumn();
+
+                                    $sth = $conn->prepare("SELECT * FROM jeux LIMIT :limite OFFSET :debut");
 
                                 } elseif ($niv_admin==2 or $niv_admin==1){
 
@@ -300,64 +305,81 @@
                                     $sth->execute();
                                     $id_user = $sth->fetchColumn();
 
-                                    $sth = $conn->prepare("SELECT * FROM jeux INNER JOIN gestion_jeux ON jeux.Id_jeux = gestion_jeux.Id_jeux and gestion_jeux.Id_user = $id_user WHERE Etat_jeux = 1");
+                                    $sth = $conn->prepare("SELECT COUNT(jeux.Id_jeux) FROM jeux INNER JOIN gestion_jeux ON jeux.Id_jeux = gestion_jeux.Id_jeux and gestion_jeux.Id_user = $id_user WHERE Etat_jeux = 1 LIMIT :limite OFFSET :debut");
+                                    $sth->execute();
+                                    //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
+                                    $nb_jeux_tot = $sth->fetchColumn();
+
+                                    $sth = $conn->prepare("SELECT * FROM jeux INNER JOIN gestion_jeux ON jeux.Id_jeux = gestion_jeux.Id_jeux and gestion_jeux.Id_user = $id_user LIMIT :limite OFFSET :debut");
 
                                 }
 
+                                $page = (!empty($_GET['page']) ? $_GET['page'] : 1);
+                                $limite = 12;
+                                $debut = ($page - 1) * $limite;
+                                $nombreDePages = ceil($nb_jeux_tot / $limite);
+
+                                $sth->bindValue('limite', $limite, PDO::PARAM_INT);
+                                $sth->bindValue('debut', $debut, PDO::PARAM_INT); 
                                 $sth->execute();
                                 //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
                                 $jeux = $sth->fetchAll(PDO::FETCH_ASSOC);
 
+                                $total_pages = ceil($nb_jeux_tot/10);
+
                                 echo '<table class="table table-striped" id="tableau_jeu">
                                         <thead>
-                                        <tr>
-                                            <th scope="col" class="text-center text-nowrap">Id <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
-                                            <th scope="col" class="text-center text-nowrap">Nom <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
-                                            <th scope="col" class="text-center text-nowrap">Cat. <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
-                                            <th scope="col" class="text-center text-nowrap">Développeur <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
-                                            <th scope="col" class="text-center text-nowrap">Editeur <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
-                                            <th scope="col" class="text-center text-nowrap">Dte Sortie <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
-                                            <th scope="col" class="text-center text-nowrap">Img <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
-                                            <th scope="col" class="text-center text-nowrap">Visible <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
-                                            <th scope="col" class="text-center text-nowrap">Outils</th>
-                                        </tr>
+                                            <tr>
+                                                <th scope="col" class="text-center text-nowrap">Id <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                                <th scope="col" class="text-center text-nowrap">Nom <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                                <th scope="col" class="text-center text-nowrap">Cat. <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                                <th scope="col" class="text-center text-nowrap">Développeur <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                                <th scope="col" class="text-center text-nowrap">Editeur <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                                <th scope="col" class="text-center text-nowrap">Dte Sortie <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                                <th scope="col" class="text-center text-nowrap">Img <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                                <th scope="col" class="text-center text-nowrap">Visible <img class="fleches" src="'.$lien.'img/up-and-down-arrows.png" alt="flèches de tri"></th>
+                                                <th scope="col" class="text-center text-nowrap">Outils</th>
+                                            </tr>
                                         </thead>
-                                        <tbody>';
-
+                                        <tbody id="pg-results">';
 
                                 // on remplit la liste de sélection de console
-                                foreach ($jeux as $jeu) {
+                                /*foreach ($jeux as $jeu) {
 
                                     $timestamp = strtotime($jeu['Date_jeux']); 
                                     $date_bon_format = date("d-m-Y", $timestamp );
 
-                                    echo '<tr>
-                                            <th scope="row" class="align-middle text-center">'.$jeu['Id_jeux'].'</th>
-                                            <td class="align-middle text-center">'.$jeu['Nom_jeux'].'</td>
-                                            <td class="align-middle text-center">'.$jeu['Cat_jeux'].'</td>
-                                            <td class="align-middle text-center">'.$jeu['Dev_jeux'].'</td>
-                                            <td class="align-middle text-center">'.$jeu['Editeur_jeux'].'</td>
-                                            <td class="align-middle text-center">'.$date_bon_format.'</td>
-                                            <td class="align-middle text-center">'.$jeu['Img_jeux'].'</td>
-                                            <td class="align-middle text-center">'.$jeu['Etat_jeux'].'</td>
-                                            <td class="align-middle text-center">
-                                                <div class="d-flex flex-row">
-                                                    <div>
-                                                        <button type="button" class="btn open_modal" data-id="'.$jeu['Id_jeux'].'" name="mod_'.$jeu['Id_jeux'].'">
-                                                            <i name="mod_'.$jeu['Id_jeux'].'" class="fas fa-pen" data-id="'.$jeu['Id_jeux'].'" id="mod_'.$jeu['Id_jeux'].'"></i>
-                                                        </button>
+                                    echo '<!-- <tr>
+                                                <th scope="row" class="align-middle text-center">'.$jeu['Id_jeux'].'</th>
+                                                <td class="align-middle text-center">'.$jeu['Nom_jeux'].'</td>
+                                                <td class="align-middle text-center">'.$jeu['Cat_jeux'].'</td>
+                                                <td class="align-middle text-center">'.$jeu['Dev_jeux'].'</td>
+                                                <td class="align-middle text-center">'.$jeu['Editeur_jeux'].'</td>
+                                                <td class="align-middle text-center">'.$date_bon_format.'</td>
+                                                <td class="align-middle text-center">'.$jeu['Img_jeux'].'</td>
+                                                <td class="align-middle text-center">'.$jeu['Etat_jeux'].'</td>
+                                                <td class="align-middle text-center">
+                                                    <div class="d-flex flex-row">
+                                                        <div>
+                                                            <button type="button" class="btn open_modal" data-id="'.$jeu['Id_jeux'].'" name="mod_'.$jeu['Id_jeux'].'">
+                                                                <i name="mod_'.$jeu['Id_jeux'].'" class="fas fa-pen" data-id="'.$jeu['Id_jeux'].'" id="mod_'.$jeu['Id_jeux'].'"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div >
+                                                            <button type="button" class="btn" onclick="Suppr_jeu(event)" name="del_'.$jeu['Id_jeux'].'">
+                                                                <i name="del_'.$jeu['Id_jeux'].'" class="fas fa-trash-can" id="del_'.$jeu['Id_jeux'].'"></i>
+                                                            </button>
+                                                        </div>
                                                     </div>
-                                                    <div >
-                                                        <button type="button" class="btn" onclick="Suppr_jeu(event)" name="del_'.$jeu['Id_jeux'].'">
-                                                            <i name="del_'.$jeu['Id_jeux'].'" class="fas fa-trash-can" id="del_'.$jeu['Id_jeux'].'"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </td>';
-                                };
+                                                </td>
+                                            </tr> -->';
+                                };*/
 
                                 echo    '</tbody>
-                                    </table>';
+                                    </table>
+                                    <div class="">
+                                        <div class="pagination d-flex justify-content-center"></div>
+                                    </div>';
 
                                 /*Fermeture de la connexion à la base de données*/
                                 $sth = null;
@@ -418,8 +440,28 @@
         </footer>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootpag/1.0.4/jquery.bootpag.min.js"></script> -->
+        <script src="//rawgit.com/botmonster/jquery-bootpag/master/lib/jquery.bootpag.min.js" type="text/javascript"></script>
         <script src="./../js/back_jeux.js"></script> 
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#pg-results").load("fetch_data.php");
+                $(".pagination").bootpag({
+                    total: <?php echo $total_pages; ?>,
+                    page: 1,
+                    maxVisible: 5,
+                    wrapClass: 'pagination',
+                    activeClass: 'active',
+                    disabledClass: 'disabled',
+                }).on("page", function(e, page_num){
+                    e.preventDefault();
+                    /*$("#results").prepend('<div class="loading-indication"><img src="ajax-loader.gif" /> Loading...</div>');*/
+                    $("#pg-results").load("fetch_data.php", {"page": page_num});
+                });
+            });
+        </script>
         <script src="./../js/tri_tableau.js"></script> 
     </body>
     
