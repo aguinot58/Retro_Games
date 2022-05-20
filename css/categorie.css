@@ -1,1 +1,406 @@
 /* CSS page catégorie */
+
+html, body{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-color: bisque;
+}
+
+#kirby_deco{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 2%;
+    top: 20%;
+    transition: 0.55s ease;
+}
+
+#alex_deco{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 86%;
+    top: 85%;
+    transition: 0.55s ease;
+}
+
+#sora_deco{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 2%;
+    top: 150%;
+    transition: 0.55s ease;
+}
+
+#kirby_deco2{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 2%;
+    top: 8%;
+    transition: 0.55s ease;
+}
+
+#alex_deco2{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 86%;
+    top: 40%;
+    transition: 0.55s ease;
+}
+
+#sora_deco2{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 2%;
+    top: 65%;
+    transition: 0.55s ease;
+}
+
+.console_ici{
+    display: flex;
+    flex-direction: column;
+}
+
+.tele_logo{
+    display: flex;
+    justify-content: center;
+    align-content: normal;
+    align-items: center
+}
+
+.console_logo{
+    margin: auto;
+    margin-bottom: -10px;
+    width: 70%;
+    text-align: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;  
+}
+
+.console_logo img{
+    z-index: 1;
+}
+
+.logo{
+    position: absolute;
+    width:15vw;
+    transform: translate(-175px, 10px);
+}
+
+.console{
+    width: 20vw;
+    height: 15vw;
+    padding-top: 150px;
+    transform: translate(125px, 75px);
+}
+
+.tele{
+    transform: translate(-175px, 35px);
+    width: 25vw;
+    padding: 0;
+    margin:0;
+}
+
+.tele img{
+    width: 500px;
+}
+
+.meuble{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+#section-1{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#section-1 .haut-etagere{
+    width: 100%;
+}
+
+#section-1 .non-log{
+    background-image: url("./../img/shelf.jpg");
+    background-size: cover;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 75px;
+    padding-bottom: 125px;
+    margin-top: -4px;
+    text-align: center;
+}
+
+#section-1 .non-log h3{
+    font-size: 36px;
+}
+
+#section-1 .non-log p{
+    font-size: 26px;
+}
+
+/*.haut_meuble{
+    padding-bottom: 40px;
+    background-image: url(../img/shelf-header.jpg);
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%; 
+    background-size: cover;
+    background-repeat: repeat;
+}
+
+.haut_meuble p{
+    margin-top: 50px;
+}
+
+.etagere{
+    width: 100%;
+    background-image: url(../img/shelf.jpg);
+    background-size: cover;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 120px;
+   
+}
+
+.jeux_etagere{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.carte img{
+    margin-left:50px ;
+    position: relative;
+    display: flex;
+    box-shadow: 15px -10px 10px 0px rgba(0, 0, 0, 0.55);
+}
+
+.carte img:hover{
+    cursor:pointer;
+}
+
+.carte{
+    list-style: none;
+    padding-left: 0px;
+    Width: 250px;
+    margin-bottom: 40px;
+    margin-left: 25px;
+    margin-right: 25px;
+}*/
+
+.nb_jeux, .pagination{
+    background-image: url("./../img/shelf-header.jpg");
+    background-repeat: repeat;
+    background-size: cover;
+    text-align: center;
+}
+
+.nb_jeux p, .pagination a{
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 80px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.pagination a{
+    text-decoration: none;
+    color: rgb(90, 90, 90);
+}
+
+.pagination a:visited{
+    color: rgb(90, 90, 90);
+}
+
+.page_active{
+    color: black;
+}
+
+.log{
+    background-image: url("./../img/shelf.jpg");
+    background-repeat: repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: -4px;
+    padding-bottom: 90px;
+    justify-content: space-between;
+}
+
+.log .carte{
+    position: relative;
+    top: 75px;
+}
+
+.log .carte figure img{
+    Width: 250px;
+    height: auto;
+    box-shadow: 15px -10px 10px 0px rgba(0, 0, 0, 0.55);
+}
+
+.log .carte figure img:hover{
+    cursor: pointer;
+}
+
+
+
+@media (max-width:1600px){
+
+    #kirby_deco, #alex_deco, #sora_deco,
+    #kirby_deco2, #alex_deco2, #sora_deco2{
+        width: 150px;
+    }
+
+    .tele{
+        margin-bottom: 10px;
+        transform: translate(-125px, 35px);
+    }
+
+    .logo{
+        transform: translate(-125px, 10px);
+    }
+
+}
+
+@media (max-width:1400px){
+
+    .tele{
+        margin-bottom: 10px;
+        transform: translate(-105px, 35px);
+    }
+
+    .logo{
+        transform: translate(-105px, 10px);
+    }
+
+    .console{
+        transform: translate(125px, 55px);
+    }
+
+    .log{
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+
+}
+
+@media screen and (max-width:1199px){
+
+    .console{
+        margin-bottom: 10px;
+        transform: translate(90px, 55px);
+    }
+
+    #kirby_deco, #alex_deco, #sora_deco,
+    #kirby_deco2, #alex_deco2, #sora_deco2{
+        width: 100px;
+    }
+
+    /*.jeux_etagere{
+        margin-bottom: 20px;
+    }*/
+
+    .tele{
+        margin-bottom: 20px;
+        transform: translate(-90px, 35px);
+    }
+
+    .logo{
+        transform: translate(-90px, 10px);
+    }
+
+    p {
+      margin-bottom: -20px;
+    }
+}
+
+@media screen and (max-width:900px){
+
+    .console{
+        margin-bottom: 30px;
+        transform: translate(65px, 55px);
+    }
+
+    .logo{
+        margin-top: 20px;
+        transform: translate(-65px, 3px);
+    }
+
+    /*.jeux_etagere{
+        margin-bottom: 70px;
+    }*/
+
+    .tele{
+        margin-bottom: 25px;
+        transform: translate(-65px, 35px);
+    }
+}
+
+@media (max-width:770px){
+
+    #kirby_deco, #sora_deco,
+    #kirby_deco2, #sora_deco2{
+        left: 1%;
+    }
+    
+    #alex_deco, #alex_deco2{
+        left: 86%;
+    }
+}
+
+@media screen and (max-width:656px){
+
+    #kirby_deco, #alex_deco, #sora_deco,
+    #kirby_deco2, #alex_deco2, #sora_deco2{
+        display: none;
+    }
+
+    /*.haut_meuble{
+        width: 100%;
+    }
+
+    .etagere{
+        width: 100%;
+    }*/
+  
+    .console_logo{
+        /*width: 100%;*/
+        display:none;
+    }
+
+    /*.carte img{
+        width: 50vw;
+    }
+
+    .carte{
+        width: 50vw;
+    }*/
+
+    .meuble{
+        width: 100%;   
+    }
+
+    /*.jeux_etagere{
+        margin-bottom: 50px;
+    }*/
+
+    .nb_jeux p, .pagination a{
+        font-size: 16px;
+    }
+}

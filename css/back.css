@@ -1,1 +1,45 @@
 /* CSS Back-office */
+main > .container {
+    padding: 60px 15px 0;
+}
+
+main div div .liens, a{
+
+    text-decoration: none;
+    color: black;
+
+}
+
+html, body{
+    background-color: rgb(204, 204, 204);
+}
+
+#input_file{
+    display: none;
+}
+
+#input_text{
+    display: block;
+}
+
+.fleches{
+
+    width: 15px;
+
+}
+
+.fleches:hover, th:hover{
+
+    cursor: pointer;
+
+}
+
+.container div #Id_Help{
+
+    width: 80%;
+
+}
+
+#msg_rep{
+    height: 150px;
+}

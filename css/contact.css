@@ -1,0 +1,269 @@
+/* CSS page d'inscription */ 
+html, body{
+    padding: 0;
+    margin: 0;
+    background-color: bisque;
+}
+
+.btn-valide-form-connexion{
+    color: White;
+    background-color: rgb(59, 96, 218);
+    font-size: 16px;
+    line-height: 20px;
+    border-radius: 10px;
+    height: 45px;
+    width: 115px;
+}
+
+.btn-valide-form-connexion img{
+    height: 25px;
+    width: 25px;
+    margin-right: 15px;
+}
+
+.bouton:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+.bouton > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.rouge{
+    color: red;
+}
+
+#ecco_deco{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 2%;
+    top: 9%;
+    transition: 0.55s ease;
+}
+
+#kefka_deco{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 86%;
+    top: 60%;
+    transition: 0.55s ease;
+}
+
+#assassin_deco{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 2%;
+    top: 120%;
+    transition: 0.55s ease;
+}
+
+#section-1{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#section-1 #haut-etagere{
+    width: 100%;
+}
+
+#section-1 .non-log{
+    background-image: url("./../img/shelf.jpg");
+    background-size: cover;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 55px;
+    padding-bottom: 125px;
+    margin-top: -4px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+#section-1 h4{
+    font-size: 36px;
+}
+
+.form-droite,
+.form-gauche {
+    display: table-cell;
+    width: 50%;
+    height: 100%;
+    vertical-align: top;
+    text-align: center;
+}
+
+.form-gauche {
+    padding: 0 50px 50px 50px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.form-gauche form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.form-gauche form p{
+    margin-top: -15px;
+    margin-bottom: 20px;
+}
+
+.formulaire-contact-champ {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+.formulaire-contact-champ:not(:last-child) {
+    padding: 0 15px 0 0;
+}
+
+.formulaire-contact-champ {
+    margin: 0 0 30px;
+}
+
+.formulaire-contact-champ label,
+.formulaire-contact-champ input {
+    display: block;
+    font-size: 18px;
+    text-align: center;
+    line-height: 25px;
+}
+
+.formulaire-contact-champ input, .formulaire-contact-champ textarea {
+    margin: 0;
+    padding: 0 0 5px;
+    background-color: #f8f8f8;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #c9c9c9;
+    outline: 0;
+    font-size: 13px;
+    transition: transform 0.2s;
+    color: #888888;
+}
+
+.formulaire-contact-champ:hover input, .formulaire-contact-champ:hover textarea {
+    transform: scale(1.02);
+}
+
+.formulaire-contact-champ input:focus, .formulaire-contact-champ textarea:focus {
+    margin: 0 0 -5px;
+    padding: 0 0 10px;
+    border-bottom-color: #007aff;
+    transform: scale(1);
+}
+
+.formulaire-contact-champ label {
+    margin: 0 0 12px;
+}
+
+.form-droite{
+    padding-top : 90px;
+}
+
+.form-droite img{
+    width: 300px;
+    height: auto;
+}
+
+#form_contact{
+    display: flex;
+    justify-content: center;
+}
+
+#message{
+    height: 150px;
+}
+
+
+@media (max-width:1600px){
+
+    #ecco_deco, #kefka_deco, #assassin_deco{
+        width: 150px;
+    }
+
+}
+
+@media (max-width:1130px){
+
+    #ecco_deco, #assassin_deco{
+        left: 0.5%;
+    }
+    
+    #kefka_deco{
+        left: 85%;
+    }
+
+    .form-droite img{
+        width: 250px;
+        padding-top: 110px;
+    }
+
+    .form-gauche{
+        padding: 0 15px 15px 15px;
+        width: 80%;
+    }
+
+}
+
+
+@media all and (max-width: 1000px){
+
+    .form-connexion{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #kefka_deco, #ecco_deco, #assassin_deco{
+        display: none;
+    }
+
+    .form-gauche{
+        padding: 0 15px 15px 15px;
+        width: 100%;
+    }
+
+    .form-droite{
+        display: none;
+    }
+
+    .formulaire-contact-champ input, .formulaire-contact-champ textarea, .formulaire-contact-champ label{
+        min-width: 175px;
+    }
+
+}
+
+/* Version Mobile */
+@media all and (max-width: 656px){
+
+    #section-1{
+        width: 100%;
+    }
+
+    .conteneur-form-login{
+        padding-top: 75px;
+        padding-bottom: 75px;
+    }
+
+}
+
+
+@media all and (max-width: 500px){
+
+    #form_contact, .form-gauche{
+        padding-left: 0px;
+        padding-right: 0px;
+        width: 100%;
+    }
+
+}

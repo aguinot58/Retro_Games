@@ -1,0 +1,64 @@
+/* CSS page de remerciement d'inscription */
+html, body{
+
+    padding: 0;
+    margin: 0;
+    background-color: bisque;
+
+}
+
+#section-1{
+
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#section-1 .haut-etagere{
+
+    width: 100%;
+
+}
+
+#section-1 .non-log{
+
+    background-image: url("./../img/shelf.jpg");
+    background-size: cover;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 75px;
+    padding-bottom: 125px;
+    margin-top: -4px;
+    text-align: center;
+
+}
+
+#section-1 .non-log h3{
+    font-size: 36px;
+}
+
+#section-1 .non-log p{
+    font-size: 26px;
+}
+
+
+/* Version Mobile */
+@media all and (max-width: 656px){
+
+    #section-1{
+
+        width: 100%;
+
+    }
+
+    #section-1 .non-log h3{
+        font-size: 36px;
+    }
+    
+    #section-1 .non-log p{
+        font-size: 26px;
+    }
+
+
+}
