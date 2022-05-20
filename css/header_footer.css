@@ -1,9 +1,307 @@
 /* CSS Header */
+.menu_header{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    position: sticky;
+    margin-top: -10px;
+    max-height: 230px;
+    z-index: 5;
+}
 
+.banniere img{
+    width: 100%;
+    max-height: 190px;
+}
 
+.menu_header nav {
+    height: 40px;
+    transition: all 0.2s ease-in-out;
+    background-color: rgb(60, 190, 250);
+    margin-top: -4px;
+    width: 100%;
+}
 
+.menu_header #barre-nav{
+    display: flex;
+    flex-direction: row;
+}
 
+.menu_header nav #barre-nav ul {
+    display: flex;
+    margin: 0;
+    height: auto;
+    list-style-type: none;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
 
+.menu_header nav #barre-nav ul li a,
+.menu_header nav #barre-nav ul .menu-bouton2 {
+    color: #212832;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    line-height: 40px;
+}
 
+.menu_header nav #barre-nav ul li:not(:last-child) {
+    margin-right: 30px;
+}
+
+.menu_header nav #barre-nav ul .menu-bouton a,
+#footer-plan a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.menu_header nav #barre-nav ul .menu-bouton2:hover{
+    cursor: pointer;
+}
+
+.menu_header nav #barre-nav #menu-connexion{
+    margin-left: 70%;
+}
 
 /* CSS Footer */
+.menu_footer{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    position: sticky;
+    margin-top: -12px;
+    max-height: 230px;
+}
+
+.menu_footer .banniere a{
+
+    margin-bottom: -5px;
+
+}
+
+.menu_footer .banniere img{
+    width: 100%;
+    max-height: 190px;
+}
+
+.menu_footer .copyright{
+
+    text-align: center;
+    background-color: rgb(60, 190, 250);
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 60px;
+    margin-top: -3px;
+    margin-bottom: 0;
+
+}
+
+.menu_footer .copyright p{
+
+    font-size: 18px;
+    line-height: 60px;
+
+}
+
+.menu_footer .copyright a{
+
+    text-decoration: none;
+    color: black;
+
+}
+
+.menu_footer .copyright a:visited{
+
+    color: black;
+
+}
+
+
+/* Menu Burger */
+.menu_header #menuToggle{
+    display: none;
+}
+
+@media (max-width:1300px){
+
+    .menu_header #barre-nav{
+        display: none;
+    }
+
+    /* menu burger */
+    .menu_header #menuToggle{
+        display: block;
+        position: relative;
+        top: 10px;
+        right: -90%;
+        z-index: 5;
+        width: 100px;
+    }
+
+    .menu_header #menuToggle a{
+        text-decoration: none;
+        color: #232323;
+        transition: color 0.3s ease;
+    }
+
+    .menu_header #menuToggle a:hover{
+        color: tomato;
+    }
+
+    .menu_header #menuToggle ul li:hover{
+        color: tomato;
+        cursor: pointer;
+    }
+
+    .menu_header #menuToggle input{
+        display: block;
+        width: 40px;
+        height: 32px;
+        position: absolute;
+        top: -7px;
+        left: -5px;
+        cursor: pointer;
+        opacity: 0; /* hide this */
+        z-index: 6; /* and place it over the hamburger */
+    }
+
+    /*
+    * Just a quick hamburger
+    */
+    .menu_header #menuToggle span{
+        display: block;
+        width: 33px;
+        height: 4px;
+        margin-bottom: 5px;
+        position: relative;
+        background: #000000;
+        border-radius: 3px;
+        z-index: 5;
+        transform-origin: 4px 0px;
+        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                    background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                    opacity 0.55s ease;
+    }
+
+    .menu_header #menuToggle span:first-child{
+        transform-origin: 0% 0%;
+    }
+
+    .menu_header #menuToggle span:nth-last-child(2){
+        transform-origin: 0% 100%;
+    }
+
+    /* 
+    * Transform all the slices of hamburger
+    * into a crossmark.
+    */
+    .menu_header #menuToggle input:checked ~ span{
+        opacity: 1;
+        transform: rotate(45deg) translate(0, -1px);
+        background: #232323;
+    }
+
+    /*
+    * But let's hide the middle one.
+    */
+    .menu_header #menuToggle input:checked ~ span:nth-child(3){
+        opacity: 0;
+        transform: rotate(0deg) scale(0.2, 0.2);
+    }
+
+    /*
+    * Ohyeah and the last one should go the other direction
+    */
+    .menu_header #menuToggle input:checked ~ span:nth-child(4){
+        transform: rotate(-45deg) translate(0px, 1px);
+    }
+
+    /*
+    * Make this absolute positioned
+    * at the top left of the screen
+    */
+
+    .menu_header nav #menuToggle #menu{
+        position: absolute;
+        width: 100px;
+        padding-left: 35px;
+        padding-top: 100px;
+        padding-bottom: 25px;
+        list-style-type: none;
+        display: none;
+        z-index: 5;
+        margin-left: -35%;
+    }
+
+    .menu_header nav #menuToggle #menu li{
+        padding: 10px 0;
+        background: #cecece;
+        width: 100%;
+        text-align: center;
+        z-index: 5;
+    }
+
+    .menu_header nav #menuToggle #menu li a{
+        font-size: 14px;
+        z-index: 5;
+    }
+
+    /*
+    * And let's slide it in from the left
+    */
+    .menu_header #menuToggle input:checked ~ #menu{
+        display: flex;
+        margin-top: -97px;
+        margin-left: 0%;
+        flex-direction: column;
+        align-items: flex-start;
+        z-index: 5;
+        width: 100px;
+        right: 50%;
+    }
+
+}
+
+
+@media all and (max-width:860px){
+
+    .menu_header #menuToggle input:checked ~ #menu{
+         right: 70%;
+    }
+
+}
+
+
+/* Version Mobile */
+@media all and (max-width:656px){
+
+    .menu_header{
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .banniere img{
+        width: 100%;
+        min-height: 90px;
+    }
+
+    .menu_header #menuToggle{
+        right: -85%;
+        width: 50px;
+    }
+
+    .menu_header #menuToggle input:checked ~ #menu{
+        right: 60%;
+    }
+
+    .menu_footer{
+        width: 100%;
+    }
+
+}
+
+

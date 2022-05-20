@@ -1,1 +1,207 @@
 /* CSS page d'accueil */
+html, body{
+
+    padding: 0;
+    margin: 0;
+    background-color: bisque;
+    z-index: 1;
+}
+
+#megaman_deco{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 2%;
+    top: 20%;
+    transition: 0.55s ease;
+}
+
+#sonic_deco{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 88%;
+    top: 75%;
+    transition: 0.55s ease;
+}
+
+#snake_deco{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 2%;
+    top: 120%;
+    transition: 0.55s ease;
+}
+
+#megaman_deco2{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 2%;
+    top: 10%;
+    transition: 0.55s ease;
+}
+
+#sonic_deco2{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 88%;
+    top: 40%;
+    transition: 0.55s ease;
+}
+
+#snake_deco2{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 2%;
+    top: 60%;
+    transition: 0.55s ease;
+}
+
+#section-1{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#section-1 .haut-etagere{
+    width: 100%;
+}
+
+#section-1 .non-log{
+    background-image: url("./../img/shelf.jpg");
+    background-size: cover;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 75px;
+    padding-bottom: 125px;
+    margin-top: -4px;
+    text-align: center;
+}
+
+#section-1 .non-log h3{
+    font-size: 36px;
+}
+
+#section-1 .non-log p{
+    font-size: 26px;
+}
+
+
+#section-2{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nb_jeux{
+    background-image: url("./../img/shelf-header.jpg");
+    background-repeat: repeat;
+    background-size: cover;
+    text-align: center;
+}
+
+.nb_jeux p{
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 60px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#section-2 .log{
+    background-image: url("./../img/shelf.jpg");
+    background-repeat: repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: -4px;
+    padding-bottom: 90px;
+}
+
+#section-2 .log .carte{
+    position: relative;
+    top: 75px;
+}
+
+#section-2 .log .carte figure img{
+    Width: 250px;
+    height: auto;
+    box-shadow: 15px -10px 10px 0px rgba(0, 0, 0, 0.55);
+}
+
+#section-2 .log .carte figure img:hover{
+    cursor: pointer;
+}
+
+
+footer{
+    margin-top: 12px;
+}
+
+
+
+
+/* Gestion des décorations lors du rétrécissement de la fenêtre */
+@media (max-width:1600px){
+
+    #megaman_deco, #sonic_deco, #snake_deco,
+    #megaman_deco2, #sonic_deco2, #snake_deco2{
+        width: 150px;
+    }
+
+}
+
+@media (max-width:1150px){
+
+    #megaman_deco, #sonic_deco, #snake_deco,
+    #megaman_deco2, #sonic_deco2, #snake_deco2{
+        width: 100px;
+    }
+
+}
+
+@media (max-width:770px){
+
+    #megaman_deco, #snake_deco,
+    #megaman_deco2, #snake_deco2{
+        left: 1%;
+    }
+    
+    #sonic_deco, #sonic_deco2{
+        left: 86%;
+        
+    }
+}
+
+
+@media all and (max-width:1414px) {
+
+    #section-2 .log{
+
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+
+    }
+
+}
+
+
+/* Version Mobile */
+@media all and (max-width:656px) {
+
+    #megaman_deco, #sonic_deco, #snake_deco,
+    #megaman_deco2, #sonic_deco2, #snake_deco2{
+        display: none;
+    }
+
+    #section-1, #section-2{
+        width: 100%
+    }
+
+}

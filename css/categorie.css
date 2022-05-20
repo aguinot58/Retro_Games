@@ -1,1 +1,249 @@
 /* CSS page catégorie */
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-color: bisque;
+}
+
+#megaman_deco{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 2%;
+    top: 20%;
+    transition: 0.55s ease;
+}
+
+#sonic_deco{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 88%;
+    top: 75%;
+    transition: 0.55s ease;
+}
+
+#snake_deco{
+    width: 200px;
+    height: auto;
+    position: absolute;
+    left: 2%;
+    top: 120%;
+    transition: 0.55s ease;
+}
+
+.console_ici{
+    display: flex;
+    flex-direction: column;
+}
+
+.tele_logo{
+    display: flex;
+    justify-content: center;
+    align-content: normal;
+    align-items: center
+}
+
+.console_logo{
+    margin: auto;
+  margin-bottom: -10px;
+    width: 70%;
+    text-align: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+   
+   
+}
+.haut_meuble p{
+   
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 50px;
+}
+
+
+.console_logo img{
+    z-index: 1;
+}
+
+.logo{
+    position: absolute;
+   width:15vw;
+  
+}
+
+.console{
+    width: 20vw;
+    height: 15vw;
+    padding-top: 150px;
+    transform: translatey(90px);
+    
+   
+}
+
+.tele{
+    
+    transform: translatey(30px);
+   
+    width: 30vw;
+}
+
+.tele img{
+    width: 500px
+}
+
+
+.meuble{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    
+}
+
+.haut_meuble{
+    padding-bottom: 40px;
+    background-image: url(../img/shelf-header.jpg);
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%; 
+    background-size: cover;
+    background-repeat: repeat;
+    
+}
+
+.etagere{
+    width: 70%;
+    background-image: url(../img/shelf.jpg);
+    background-size: cover;
+    display: flex;
+    
+    margin-left: auto;
+    margin-right: auto;
+    
+     padding-top: 120px;
+   
+}
+
+.jeux_etagere{
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+   
+    
+}
+.carte img{
+    margin-left:50px ;
+    position: relative;
+    display: flex;
+     box-shadow: 15px -10px 10px 0px rgba(0, 0, 0, 0.55);
+    
+   
+}
+
+.carte img:hover{
+    cursor:pointer;
+}
+
+.carte{
+    list-style: none;
+    padding-left: 0px;
+    Width: 250px;
+   
+    margin-bottom: 40px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+@media (max-width:1600px){
+
+    #megaman_deco, #sonic_deco, #snake_deco,
+    #megaman_deco2, #sonic_deco2, #snake_deco2{
+        width: 150px;
+    }
+
+}
+
+
+@media screen and (max-width:1199px){
+    .console{
+        margin-bottom: 10px;
+    }
+
+    #megaman_deco, #sonic_deco, #snake_deco,
+    #megaman_deco2, #sonic_deco2, #snake_deco2{
+        width: 100px;
+    }
+    .jeux_etagere{
+        margin-bottom: 20px;
+    }
+    .tele{
+        margin-bottom: 10px;
+    }
+    p {
+      margin-bottom: -20px;
+    }
+}
+
+@media screen and (max-width:900px){
+
+    .console{
+        margin-bottom: 30px;
+    }
+    .logo{
+        margin-top: 20px;
+    }
+    .jeux_etagere{
+        margin-bottom: 70px;
+    }
+    .tele{
+        margin-bottom: 15px;
+    }
+}
+
+
+@media screen and (max-width:656px){
+
+    .haut_meuble{
+        width: 100%;
+    }
+    .etagere{
+        width: 100%;
+    }
+  
+    .console_logo{
+        width: 100%;
+    }
+    .logo{
+        width: 20vw;
+        height: 20vw;
+    }
+
+    .console{
+        width: 30vw;
+    height: 25vw;
+    }
+    .tele{
+        margin-bottom: 10px;
+        width: 50vw;
+        height: 50vw;
+    }
+
+    .carte img{
+        width: 50vw;
+            }
+    .carte{
+        width: 50vw;
+        
+    }
+
+    .jeux_etagere{
+        margin-bottom: 50px;
+    }
+}
