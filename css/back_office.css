@@ -1,0 +1,15 @@
+/* CSS Back-office */
+main > .container {
+    padding: 60px 15px 0;
+}
+
+.liens{
+
+    text-decoration: none;
+    color: black;
+
+}
+
+html, body{
+    background-color: rgb(204, 204, 204);
+}
