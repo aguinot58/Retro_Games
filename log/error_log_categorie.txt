@@ -1,0 +1,96 @@
+
+
+vendredi 20 mai 2022 11:47:50 - Erreur import jeux. Erreur : PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in C:\laragon\www\Retro_Games\pages\categorie.php:82
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\categorie.php(82): PDOStatement->execute()
+#1 {main}
+
+vendredi 20 mai 2022 11:47:53 - Erreur import jeux. Erreur : PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in C:\laragon\www\Retro_Games\pages\categorie.php:82
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\categorie.php(82): PDOStatement->execute()
+#1 {main}
+
+vendredi 20 mai 2022 11:47:55 - Erreur import jeux. Erreur : PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in C:\laragon\www\Retro_Games\pages\categorie.php:82
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\categorie.php(82): PDOStatement->execute()
+#1 {main}
+
+vendredi 20 mai 2022 11:47:57 - Erreur import jeux. Erreur : PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in C:\laragon\www\Retro_Games\pages\categorie.php:82
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\categorie.php(82): PDOStatement->execute()
+#1 {main}
+
+vendredi 20 mai 2022 11:47:59 - Erreur import jeux. Erreur : PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in C:\laragon\www\Retro_Games\pages\categorie.php:82
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\categorie.php(82): PDOStatement->execute()
+#1 {main}
+
+vendredi 20 mai 2022 11:48:02 - Erreur import jeux. Erreur : PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in C:\laragon\www\Retro_Games\pages\categorie.php:82
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\categorie.php(82): PDOStatement->execute()
+#1 {main}
+
+vendredi 20 mai 2022 11:48:03 - Erreur import jeux. Erreur : PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in C:\laragon\www\Retro_Games\pages\categorie.php:82
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\categorie.php(82): PDOStatement->execute()
+#1 {main}
+
+vendredi 20 mai 2022 11:48:05 - Erreur import jeux. Erreur : PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in C:\laragon\www\Retro_Games\pages\categorie.php:82
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\categorie.php(82): PDOStatement->execute()
+#1 {main}
+
+vendredi 20 mai 2022 11:48:07 - Erreur import jeux. Erreur : PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in C:\laragon\www\Retro_Games\pages\categorie.php:82
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\categorie.php(82): PDOStatement->execute()
+#1 {main}
+
+vendredi 20 mai 2022 11:48:09 - Erreur import jeux. Erreur : PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in C:\laragon\www\Retro_Games\pages\categorie.php:82
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\categorie.php(82): PDOStatement->execute()
+#1 {main}
+
+vendredi 20 mai 2022 11:48:10 - Erreur import jeux. Erreur : PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in C:\laragon\www\Retro_Games\pages\categorie.php:82
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\categorie.php(82): PDOStatement->execute()
+#1 {main}
+
+vendredi 20 mai 2022 11:48:21 - Erreur import jeux. Erreur : PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in C:\laragon\www\Retro_Games\pages\categorie.php:82
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\categorie.php(82): PDOStatement->execute()
+#1 {main}
+
+vendredi 20 mai 2022 11:48:26 - Erreur import jeux. Erreur : PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in C:\laragon\www\Retro_Games\pages\categorie.php:82
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\categorie.php(82): PDOStatement->execute()
+#1 {main}
+
+vendredi 20 mai 2022 11:49:42 - Erreur import jeux. Erreur : PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in C:\laragon\www\Retro_Games\pages\categorie.php:82
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\categorie.php(82): PDOStatement->execute()
+#1 {main}
+
+vendredi 20 mai 2022 11:52:40 - Erreur import jeux. Erreur : PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in C:\laragon\www\Retro_Games\pages\categorie.php:82
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\categorie.php(82): PDOStatement->execute()
+#1 {main}
+
+vendredi 20 mai 2022 11:52:42 - Erreur import jeux. Erreur : PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in C:\laragon\www\Retro_Games\pages\categorie.php:82
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\categorie.php(82): PDOStatement->execute()
+#1 {main}
+
+vendredi 20 mai 2022 11:55:08 - Erreur import jeux. Erreur : PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in C:\laragon\www\Retro_Games\pages\categorie.php:82
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\categorie.php(82): PDOStatement->execute()
+#1 {main}
+
+vendredi 20 mai 2022 11:55:09 - Erreur import jeux. Erreur : PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in C:\laragon\www\Retro_Games\pages\categorie.php:82
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\categorie.php(82): PDOStatement->execute()
+#1 {main}
+
+vendredi 20 mai 2022 11:57:49 - Erreur import jeux. Erreur : PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1 in C:\laragon\www\Retro_Games\pages\categorie.php:82
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\categorie.php(82): PDOStatement->execute()
+#1 {main}

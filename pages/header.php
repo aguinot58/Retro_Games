@@ -41,9 +41,9 @@
                             <span></span>
                             <span></span>
                             <ul id="menu">
-                                <li class="menu-bouton2" onclick="page_console(event)">Super Nintendo</li>
-                                <li class="menu-bouton2" onclick="page_console(event)">Megadrive</li>
-                                <li class="menu-bouton2" onclick="page_console(event)">Playstation</li>
+                                <li id="Super Nintendo" class="menu-bouton2" onclick="page_console(event)">Super Nintendo</li>
+                                <li id="Megadrive" class="menu-bouton2" onclick="page_console(event)">Megadrive</li>
+                                <li id="Playstation" class="menu-bouton2" onclick="page_console(event)">Playstation</li>
                                 <li></li>';
                         if ($_SESSION['admin'] == 'oui') {
                             echo '<li class="menu-bouton"><a href="'.$lien.'pages/profil.php">Mon Compte</a></li>
