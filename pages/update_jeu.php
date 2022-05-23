@@ -87,7 +87,7 @@
 
                 if ($gestion_id != $gestion_jeu) {
 
-                    //On met à jour les données reçues dans la table jeux
+                    //On met à jour les données reçues dans la table gestion_jeux
                     $sth = $conn->prepare("UPDATE gestion_jeux set Id_user=:id_user WHERE Id_jeux = :id_jeu");
                     $sth->bindParam(':id_user', $gestion_jeu);    
                     $sth->bindParam(':id_jeu', $id_jeu);
