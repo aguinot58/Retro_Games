@@ -19,6 +19,7 @@
     }
 
     require $lien.'pages/fonctions.php';
+    require $lien.'pages/conn_bdd.php';
 
 ?>
 
@@ -74,51 +75,29 @@
                             <article class="conteneur-form">
                                 <form class="form-connexion" method="POST" onsubmit="return valider_mail()" action="'.$lien.'pages/maj_mail_user.php">
                                     <label>Ancienne adresse e-mail</label>';
-
+                            
                                     try{
 
-                                        /* Connexion à une base de données en PDO */
-                                        $configs = include($lien.'pages/config.php');
-                                        $servername = $configs['servername'];
-                                        $username = $configs['username'];
-                                        $password = $configs['password'];
-                                        $db = $configs['database'];
-                            
-                                        //On établit la connexion
-                                        $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
-                                        //On définit le mode d'erreur de PDO sur Exception
-                                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                            
-                                        try{
+                                        $sth = $conn->prepare("SELECT Mail_user FROM utilisateurs where Ident_user = '$ident_user'");
+                                        $sth->execute();
+                                        $ancien_mail = $sth->fetchColumn();
 
-                                            $sth = $conn->prepare("SELECT Mail_user FROM utilisateurs where Ident_user = '$ident_user'");
-                                            $sth->execute();
-                                            $ancien_mail = $sth->fetchColumn();
+                                        echo        '<input type="text" id="ancien_mail" name="ancien_mail" placeholder="Ancien e-mail" value="'.$ancien_mail.'" required=""/>';
 
-                                            echo        '<input type="text" id="ancien_mail" name="ancien_mail" placeholder="Ancien e-mail" value="'.$ancien_mail.'" required=""/>';
+                                        /*Fermeture de la connexion à la base de données*/
+                                        $sth = null;
+                                        $conn = null;
 
-                                            /*Fermeture de la connexion à la base de données*/
-                                            $sth = null;
-                                            $conn = null;
-
-                                        }
-                                        /*On capture les exceptions si une exception est lancée et on affiche
-                                        *les informations relatives à celle-ci*/
-                                        catch(PDOException $e){
-                                            //echo 'Impossible de traiter les données. Erreur : '.$e->getMessage();
-                                            write_error_log("./../log/error_log_profil.txt","Echec extraction adresse e-mail.", $e);
-                                            echo 'Une erreur est survenue, merci de réessayer ultérieurement.';
-                            
-                                            /*Fermeture de la connexion à la base de données*/
-                                            $sth = null;
-                                            $conn = null;
-                                        }
                                     }
+                                    /*On capture les exceptions si une exception est lancée et on affiche
+                                    *les informations relatives à celle-ci*/
                                     catch(PDOException $e){
-                                        // erreur de connexion à la bdd
-                                        //echo "Erreur : " . $e->getMessage();
-                                        write_error_log("./../log/error_log_profil.txt","Impossible de se connecter à la base de données.", $e);
+                                        write_error_log("./../log/error_log_profil.txt","Echec extraction adresse e-mail.", $e);
                                         echo 'Une erreur est survenue, merci de réessayer ultérieurement.';
+                            
+                                        /*Fermeture de la connexion à la base de données*/
+                                        $sth = null;
+                                        $conn = null;
                                     }
 
                             echo   '<label>Nouvelle adresse e-mail</label>

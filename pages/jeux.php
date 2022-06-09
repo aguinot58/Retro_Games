@@ -21,6 +21,8 @@
     if (isset($_GET['id_jeux'])){
         $id_jeux = $_GET['id_jeux'];
     }
+
+    require $lien.'pages/conn_bdd.php';
 ?>
 
 
@@ -47,18 +49,6 @@
                 echo '<img id="psykokwak_deco" src="'.$lien.'img/psykokwak_deco.png" alt="psykokwak">';
                 echo '<img id="fantasia_deco" src="'.$lien.'img/fantasia_deco.png" alt="Mickey Fantasia">';
                 echo '<img id="medievil_deco" src="'.$lien.'img/medievil_deco.png" alt="Medievil">';
-
-                try{
-
-                    /* Connexion à une base de données en PDO */
-                    $configs = include($lien.'pages/config.php');
-                    $servername = $configs['servername'];
-                    $username = $configs['username'];
-                    $password = $configs['password'];
-                    $db = $configs['database'];
-
-                    $conn = new PDO("mysql:host=$servername;dbname=$db;charset=utf8", $username,$password);
-                    $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
                     try{
 
@@ -101,7 +91,6 @@
                         $conn = null;
                 
                     }
-
                     catch(PDOException $e){
 
                         date_default_timezone_set('Europe/Paris');
@@ -113,26 +102,6 @@
                         fwrite($fichier, "\n\n" .$date1. " - Erreur import jeux. Erreur : " .$e);
                         fclose($fichier);
                     }
-
-                }
-                catch(PDOException $e){
-
-                    echo "Erreur : " .$e->getMessage();
-
-                    date_default_timezone_set('Europe/Paris');
-                    setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-                    $format1 = '%A %d %B %Y %H:%M:%S';
-                    $date1 = strftime($format1);
-                    $fichier = fopen('./../log/error_log_jeux.txt', 'c+b');
-                    fseek($fichier, filesize('./../log/error_log_jeux.txt'));
-                    fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données. Erreur : " .$e);
-                    fclose($fichier);
-
-                    echo    '<article>
-                                <p>Une erreur est survenue lors de la connexion à la base de données.<br><br>
-                                    Merci de rafraichir la page, et si le problème persiste, de réessayer ultérieurement.   </p>
-                            </article>';
-                }
 
                 echo '<div class="donkey_tombe">
                         <img class="donkey2" src="../img/donkey_kong_deco3.png" alt="donkey kong qui tombe">

@@ -11,19 +11,9 @@
     }
 
     require $lien.'pages/fonctions.php';
-
-    /* Connexion à une base de données en PDO */
-    $configs = include($lien.'pages/config.php'); 
-    $servername = $configs['servername'];
-    $username = $configs['username'];
-    $password = $configs['password'];
-    $db = $configs['database'];
-    //On établit la connexion
+    require $lien.'pages/conn_bdd.php';
 
     try{
-        $conn = new PDO("mysql:host=$servername;dbname=$db;charset=UTF8", $username, $password);
-        //On définit le mode d'erreur de PDO sur Exception
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         if(!empty($_POST) && array_key_exists("id_user", $_POST)){
             $id_user = $_POST['id_user'];

@@ -14,21 +14,11 @@
             $lien = "./../";
         }
 
-        /* Connexion à une base de données en PDO */
-        $configs = include($lien.'pages/config.php'); 
-        $servername = $configs['servername'];
-        $username = $configs['username'];
-        $password = $configs['password'];
-        $db = $configs['database'];
-        //On établit la connexion
-        try{
-            $conn2 = new PDO("mysql:host=$servername;dbname=$db;charset=UTF8", $username, $password);
-            //On définit le mode d'erreur de PDO sur Exception
-            $conn2->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        require $lien.'pages/conn_bdd.php';
 
             try{
 
-                $sth = $conn2->prepare("SELECT * FROM jeux INNER JOIN gestion_jeux ON jeux.Id_jeux = gestion_jeux.Id_jeux and jeux.Id_jeux = $id_jeu");
+                $sth = $conn->prepare("SELECT * FROM jeux INNER JOIN gestion_jeux ON jeux.Id_jeux = gestion_jeux.Id_jeux and jeux.Id_jeux = $id_jeu");
                 $sth->execute();
                 //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
                 $jeux = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -99,7 +89,7 @@
                                                         try{
 
                                                             //Sélectionne les valeurs dans les colonnes pour chaque entrée de la table
-                                                            $sth = $conn2->prepare("SELECT Id_cat, Nom_cat FROM categories ORDER BY Id_cat ASC");
+                                                            $sth = $conn->prepare("SELECT Id_cat, Nom_cat FROM categories ORDER BY Id_cat ASC");
                                                             $sth->execute();
                                                             //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
                                                             $categories = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -127,7 +117,7 @@
                                         
                                                             //Fermeture de la connexion à la base de données
                                                             $sth = null;
-                                                            $conn2 = null;    
+                                                            $conn = null;    
                                                         }
                                                             
                     echo                    '</select>
@@ -165,7 +155,7 @@
                                                         try{
 
                                                             //Sélectionne les valeurs dans les colonnes pour chaque entrée de la table
-                                                            $sth = $conn2->prepare("SELECT Id_user, Ident_user FROM utilisateurs WHERE Id_user IN 
+                                                            $sth = $conn->prepare("SELECT Id_user, Ident_user FROM utilisateurs WHERE Id_user IN 
                                                                                     (SELECT Id_user FROM gestion_jeux WHERE Id_jeux = $id_jeu)");
                                                             $sth->execute();
                                                             //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
@@ -177,7 +167,7 @@
                                                             }
 
                                                             //Sélectionne les valeurs dans les colonnes pour chaque entrée de la table
-                                                            $sth = $conn2->prepare("SELECT Id_user, Ident_user FROM utilisateurs");
+                                                            $sth = $conn->prepare("SELECT Id_user, Ident_user FROM utilisateurs");
                                                             $sth->execute();
                                                             //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
                                                             $users = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -205,7 +195,7 @@
                                         
                                                             //Fermeture de la connexion à la base de données
                                                             $sth = null;
-                                                            $conn2 = null;    
+                                                            $conn = null;    
                                                         }
 
                                         echo    '</select>
@@ -226,7 +216,7 @@
 
                             /*Fermeture de la connexion à la base de données*/
                             $sth = null;
-                            $conn2 = null;
+                            $conn = null;
 
                             break;
 
@@ -235,38 +225,20 @@
             }
             catch(PDOException $e){
                                 
-            date_default_timezone_set('Europe/Paris');
-            setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-            $format1 = '%A %d %B %Y %H:%M:%S';
-            $date1 = strftime($format1);
-            $fichier = fopen('./../log/error_log_modif_jeux.txt', 'c+b');
-            fseek($fichier, filesize('./../log/error_log_modif_jeux.txt'));
-            fwrite($fichier, "\n\n" .$date1. " - Erreur import données jeux. Erreur : " .$e);
-            fclose($fichier);
+                date_default_timezone_set('Europe/Paris');
+                setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
+                $format1 = '%A %d %B %Y %H:%M:%S';
+                $date1 = strftime($format1);
+                $fichier = fopen('./../log/error_log_modif_jeux.txt', 'c+b');
+                fseek($fichier, filesize('./../log/error_log_modif_jeux.txt'));
+                fwrite($fichier, "\n\n" .$date1. " - Erreur import données jeux. Erreur : " .$e);
+                fclose($fichier);
 
-            /*Fermeture de la connexion à la base de données*/
-            $sth = null;
-            $conn2 = null;    
+                /*Fermeture de la connexion à la base de données*/
+                $sth = null;
+                $conn = null;    
+
             }
-
-        }
-        /*On capture les exceptions et si une exception est lancée, on écrit dans un fichier log
-        *les informations relatives à celle-ci*/
-        catch(PDOException $e){
-        date_default_timezone_set('Europe/Paris');
-        setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-        $format1 = '%A %d %B %Y %H:%M:%S';
-        $date1 = strftime($format1);
-        $fichier = fopen('./../log/error_log_modif_jeux.txt', 'c+b');
-        fseek($fichier, filesize('./../log/error_log_modif_jeux.txt'));
-        fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données - Erreur : " .$e);
-        fclose($fichier);
-                                
-        echo   '<article class="container">
-                    <p>Une erreur est survenue lors de la connexion à la base de données.<br><br>
-                    Merci de rafraichir la page, et si le problème persiste, de réessayer ultérieurement.   </p>
-                </article>';
-        }
 
     }else{
         echo 'pb id_jeu';

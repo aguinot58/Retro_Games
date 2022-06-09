@@ -14,21 +14,11 @@
             $lien = "./../";
         }
 
-        /* Connexion à une base de données en PDO */
-        $configs = include($lien.'pages/config.php'); 
-        $servername = $configs['servername'];
-        $username = $configs['username'];
-        $password = $configs['password'];
-        $db = $configs['database'];
-        //On établit la connexion
-        try{
-            $conn2 = new PDO("mysql:host=$servername;dbname=$db;charset=UTF8", $username, $password);
-            //On définit le mode d'erreur de PDO sur Exception
-            $conn2->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        require $lien.'pages/conn_bdd.php';
 
             try{
 
-                $sth = $conn2->prepare("SELECT * FROM reponses WHERE Id_rep = :id_rep");
+                $sth = $conn->prepare("SELECT * FROM reponses WHERE Id_rep = :id_rep");
                 $sth->bindParam(':id_rep', $id_rep);
                 $sth->execute();
                 //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
@@ -37,7 +27,7 @@
                 foreach ($reponses as $reponse) {
 
                     // on profite de récupérer les infos de la réponse pour extraire certaines informations sur l'auteur de la réponse 
-                    $sth = $conn2->prepare("SELECT * FROM utilisateurs WHERE Id_user = :id_user");
+                    $sth = $conn->prepare("SELECT * FROM utilisateurs WHERE Id_user = :id_user");
                     $sth->bindParam(':id_user', $reponse['Id_user']);
                     $sth->execute();
                     //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
@@ -91,47 +81,27 @@
 
                     /*Fermeture de la connexion à la base de données*/
                     $sth = null;
-                    $conn2 = null;
+                    $conn = null;
 
                     break;
 
                 }
 
             }
-            catch(PDOException $e){
-                                
-            date_default_timezone_set('Europe/Paris');
-            setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-            $format1 = '%A %d %B %Y %H:%M:%S';
-            $date1 = strftime($format1);
-            $fichier = fopen('./../log/error_log_modal_consult_msg.txt', 'c+b');
-            fseek($fichier, filesize('./../log/error_log_modal_consult_msg.txt'));
-            fwrite($fichier, "\n\n" .$date1. " - Erreur import données message. Erreur : " .$e);
-            fclose($fichier);
+            catch(PDOException $e){    
+                date_default_timezone_set('Europe/Paris');
+                setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
+                $format1 = '%A %d %B %Y %H:%M:%S';
+                $date1 = strftime($format1);
+                $fichier = fopen('./../log/error_log_modal_consult_msg.txt', 'c+b');
+                fseek($fichier, filesize('./../log/error_log_modal_consult_msg.txt'));
+                fwrite($fichier, "\n\n" .$date1. " - Erreur import données message. Erreur : " .$e);
+                fclose($fichier);
 
-            /*Fermeture de la connexion à la base de données*/
-            $sth = null;
-            $conn2 = null;    
+                /*Fermeture de la connexion à la base de données*/
+                $sth = null;
+                $conn = null;    
             }
-
-        }
-        /*On capture les exceptions et si une exception est lancée, on écrit dans un fichier log
-        *les informations relatives à celle-ci*/
-        catch(PDOException $e){
-        date_default_timezone_set('Europe/Paris');
-        setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-        $format1 = '%A %d %B %Y %H:%M:%S';
-        $date1 = strftime($format1);
-        $fichier = fopen('./../log/error_log_modal_consult_msg.txt', 'c+b');
-        fseek($fichier, filesize('./../log/error_log_modal_consult_msg.txt'));
-        fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données - Erreur : " .$e);
-        fclose($fichier);
-                                
-        echo   '<article class="container">
-                    <p>Une erreur est survenue lors de la connexion à la base de données.<br><br>
-                    Merci de rafraichir la page, et si le problème persiste, de réessayer ultérieurement.   </p>
-                </article>';
-        }
 
     }else{
         echo 'pb id_msg';

@@ -189,68 +189,38 @@
                                     <label for="cat_jeux" class="form-label">Plate-forme</label>
                                     <select id="cat_jeux" class="form-select" name="cat_jeux" aria-label="Default select example">
                                         <option selected>Choix</option>';
-                                                /* Connexion à une base de données en PDO */
-                                                $configs = include($lien.'pages/config.php');
-                                                $servername = $configs['servername'];
-                                                $username = $configs['username'];
-                                                $password = $configs['password'];
-                                                $db = $configs['database'];
-                                                //On établit la connexion
+                                            require $lien.'pages/conn_bdd.php';
+
                                                 try{
-                                                    $conn = new PDO("mysql:host=$servername;dbname=$db;charset=UTF8", $username, $password);
-                                                    //On définit le mode d\'erreur de PDO sur Exception
-                                                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                                                    try{
+                                                    //Sélectionne les valeurs dans les colonnes pour chaque entrée de la table
+                                                    $sth = $conn->prepare("SELECT Id_cat, Nom_cat FROM categories ORDER BY Id_cat ASC");
+                                                    $sth->execute();
+                                                    //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
+                                                    $categories = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-                                                        //Sélectionne les valeurs dans les colonnes pour chaque entrée de la table
-                                                        $sth = $conn->prepare("SELECT Id_cat, Nom_cat FROM categories ORDER BY Id_cat ASC");
-                                                        $sth->execute();
-                                                        //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
-                                                        $categories = $sth->fetchAll(PDO::FETCH_ASSOC);
+                                                    // on remplit la liste de sélection de console
+                                                    foreach ($categories as $categorie) {
+                                                        echo '<option value="'.$categorie['Id_cat'].'">'.$categorie['Nom_cat'].'</option>';
+                                                    };
 
-                                                        // on remplit la liste de sélection de console
-                                                        foreach ($categories as $categorie) {
-                                                            echo '<option value="'.$categorie['Id_cat'].'">'.$categorie['Nom_cat'].'</option>';
-                                                        };
-
-                                                        /*Fermeture de la connexion à la base de données*/
-                                                        $sth = null;
-                                                        $conn = null;
-                                                    }
-                                                    catch(PDOException $e){
-                                
-                                                        date_default_timezone_set('Europe/Paris');
-                                                        setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-                                                        $format1 = '%A %d %B %Y %H:%M:%S';
-                                                        $date1 = strftime($format1);
-                                                        $fichier = fopen('./../log/error_log_back_jeux.txt', 'c+b');
-                                                        fseek($fichier, filesize('./../log/error_log_back_jeux.txt'));
-                                                        fwrite($fichier, "\n\n" .$date1. " - Erreur import liste catégorie consoles. Erreur : " .$e);
-                                                        fclose($fichier);
-                            
-                                                        /*Fermeture de la connexion à la base de données*/
-                                                        $sth = null;
-                                                        $conn = null;    
-                                                    }
+                                                    /*Fermeture de la connexion à la base de données*/
+                                                    $sth = null;
+                                                    $conn = null;
                                                 }
-                                                /*On capture les exceptions et si une exception est lancée, on écrit dans un fichier log
-                                                *les informations relatives à celle-ci*/
                                                 catch(PDOException $e){
-                                                //echo "Erreur : " . $e->getMessage();
-                                                date_default_timezone_set('Europe/Paris');
-                                                setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-                                                $format1 = '%A %d %B %Y %H:%M:%S';
-                                                $date1 = strftime($format1);
-                                                $fichier = fopen('./../log/error_log_back_jeux.txt', 'c+b');
-                                                fseek($fichier, filesize('./../log/error_log_back_jeux.txt'));
-                                                fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données - remplissage select ajout jeux. Erreur : " .$e);
-                                                fclose($fichier);
+                                                    date_default_timezone_set('Europe/Paris');
+                                                    setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
+                                                    $format1 = '%A %d %B %Y %H:%M:%S';
+                                                    $date1 = strftime($format1);
+                                                    $fichier = fopen('./../log/error_log_back_jeux.txt', 'c+b');
+                                                    fseek($fichier, filesize('./../log/error_log_back_jeux.txt'));
+                                                    fwrite($fichier, "\n\n" .$date1. " - Erreur import liste catégorie consoles. Erreur : " .$e);
+                                                    fclose($fichier);
                             
-                                                echo   '<article class="connexion-bdd-hs">
-                                                            <p>Une erreur est survenue lors de la connexion à la base de données.<br><br>
-                                                                Merci de rafraichir la page, et si le problème persiste, de réessayer ultérieurement.   </p>
-                                                        </article>';
+                                                    /*Fermeture de la connexion à la base de données*/
+                                                    $sth = null;
+                                                    $conn = null;    
                                                 }
                                             
                         echo       '</select>
@@ -274,17 +244,7 @@
                     <div class="container mb-5 table-responsive">
                         <h3 class="mt-3 mb-4">Liste des jeux</h3>';
 
-                        /* Connexion à une base de données en PDO */
-                        $configs = include($lien.'pages/config.php');
-                        $servername = $configs['servername'];
-                        $username = $configs['username'];
-                        $password = $configs['password'];
-                        $db = $configs['database'];
-                        //On établit la connexion
-                        try{
-                            $conn = new PDO("mysql:host=$servername;dbname=$db;charset=UTF8", $username, $password);
-                            //On définit le mode d\'erreur de PDO sur Exception
-                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        require $lien.'pages/conn_bdd.php';
 
                             try{
 
@@ -343,38 +303,6 @@
                                         </thead>
                                         <tbody id="pg-results">';
 
-                                // on remplit la liste de sélection de console
-                                /*foreach ($jeux as $jeu) {
-
-                                    $timestamp = strtotime($jeu['Date_jeux']); 
-                                    $date_bon_format = date("d-m-Y", $timestamp );
-
-                                    echo '<!-- <tr>
-                                                <th scope="row" class="align-middle text-center">'.$jeu['Id_jeux'].'</th>
-                                                <td class="align-middle text-center">'.$jeu['Nom_jeux'].'</td>
-                                                <td class="align-middle text-center">'.$jeu['Cat_jeux'].'</td>
-                                                <td class="align-middle text-center">'.$jeu['Dev_jeux'].'</td>
-                                                <td class="align-middle text-center">'.$jeu['Editeur_jeux'].'</td>
-                                                <td class="align-middle text-center">'.$date_bon_format.'</td>
-                                                <td class="align-middle text-center">'.$jeu['Img_jeux'].'</td>
-                                                <td class="align-middle text-center">'.$jeu['Etat_jeux'].'</td>
-                                                <td class="align-middle text-center">
-                                                    <div class="d-flex flex-row">
-                                                        <div>
-                                                            <button type="button" class="btn open_modal" data-id="'.$jeu['Id_jeux'].'" name="mod_'.$jeu['Id_jeux'].'">
-                                                                <i name="mod_'.$jeu['Id_jeux'].'" class="fas fa-pen" data-id="'.$jeu['Id_jeux'].'" id="mod_'.$jeu['Id_jeux'].'"></i>
-                                                            </button>
-                                                        </div>
-                                                        <div >
-                                                            <button type="button" class="btn" onclick="Suppr_jeu(event)" name="del_'.$jeu['Id_jeux'].'">
-                                                                <i name="del_'.$jeu['Id_jeux'].'" class="fas fa-trash-can" id="del_'.$jeu['Id_jeux'].'"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr> -->';
-                                };*/
-
                                 echo    '</tbody>
                                     </table>
                                     <div class="">
@@ -400,27 +328,6 @@
                                 $sth = null;
                                 $conn = null;    
                             }
-            
-                        }
-                        /*On capture les exceptions et si une exception est lancée, on écrit dans un fichier log
-                        *les informations relatives à celle-ci*/
-                        catch(PDOException $e){
-                        //echo "Erreur : " . $e->getMessage();
-                        date_default_timezone_set('Europe/Paris');
-                        setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-                        $format1 = '%A %d %B %Y %H:%M:%S';
-                        $date1 = strftime($format1);
-                        $fichier = fopen('./../log/error_log_back_jeux.txt', 'c+b');
-                        fseek($fichier, filesize('./../log/error_log_back_jeux.txt'));
-                        fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données - extraction liste jeux pour tableau. Erreur : " .$e);
-                        fclose($fichier);
-                            
-                        echo   '<article class="container">
-                                    <p>Une erreur est survenue lors de la connexion à la base de données.<br><br>
-                                        Merci de rafraichir la page, et si le problème persiste, de réessayer ultérieurement.   </p>
-                                </article>';
-                        }
-
 
                     echo '</div>';
                 } else {
@@ -441,7 +348,6 @@
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootpag/1.0.4/jquery.bootpag.min.js"></script> -->
         <script src="//rawgit.com/botmonster/jquery-bootpag/master/lib/jquery.bootpag.min.js" type="text/javascript"></script>
         <script src="./../js/back_jeux.js"></script> 
 

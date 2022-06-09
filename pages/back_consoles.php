@@ -184,32 +184,16 @@
                             <!-- liste des jeux en fonction du niveau d\'admin -->
                             <div class="container mb-5">
                                 <h3 class="mt-3 mb-4">Liste des consoles</h3>';
-                 
 
-                              /* Connexion à une base de données en PDO */
-                        $configs = include($lien.'pages/config.php');
-                        $servername = $configs['servername'];
-                        $username = $configs['username'];
-                        $password = $configs['password'];
-                        $db = $configs['database'];
-                        //On établit la connexion
-                        try{
-                            $conn = new PDO("mysql:host=$servername;dbname=$db;charset=UTF8", $username, $password);
-                            //On définit le mode d\'erreur de PDO sur Exception
-                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                            /* Connexion à une base de données en PDO */
+                            require $lien.'pages/conn_bdd.php';
 
                             try{
 
                                 if ($niv_admin==3){
-
                                     $sth = $conn->prepare("SELECT * FROM categories ");
-                               
-                            
-                            
                                 }elseif ($niv_admin==2 or $niv_admin==1){
-
                                     $ident_user = $_SESSION['user'];
-
                                     echo 'vous n\'avez pas l\'autorisation de modifier les consoles'; 
                                 }
 
@@ -233,7 +217,6 @@
                                         // on remplit la liste de sélection de console
                                 foreach ($consoles as $console) {
 
-
                                     echo '<tr>
                                             <th scope="row" class="align-middle text-center">'.$console['Id_cat'].'</th>
                                             <td class="align-middle text-center">'.$console['Nom_cat'].'</td>
@@ -256,7 +239,6 @@
                                             </td>';
                                 };
 
-
                                  echo     '</tbody>
                                         </table>';
                             }
@@ -276,58 +258,9 @@
                                 $conn = null;
                             }
 
-
-
-
-
-                          
-                        }
-                        catch(PDOException $e){
-                            
-                        date_default_timezone_set('Europe/Paris');
-                        setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-                        $format1 = '%A %d %B %Y %H:%M:%S';
-                        $date1 = strftime($format1);
-                        $fichier = fopen('./../log/error_log_back_jeux.txt', 'c+b');
-                        fseek($fichier, filesize('./../log/error_log_back_jeux.txt'));
-                        fwrite($fichier, "\n\n" .$date1. " - Erreur import liste jeux. Erreur : " .$e);
-                        fclose($fichier);
-
-                        /*Fermeture de la connexion à la base de données*/
-                        $sth = null;
-                        $conn = null;
-
-                        }
-                            
-                        
-                        
-                        
-                        
                         echo '</div>';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-              }else{
+            }else{
                     
                 echo   '<div class="container">
                         <h3 class="mt-5 mb-5">Merci de vous connecter à votre compte.</h3>

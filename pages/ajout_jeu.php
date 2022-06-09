@@ -11,6 +11,7 @@
     }
 
     require $lien.'pages/fonctions.php';
+    require $lien.'pages/conn_bdd.php';
 
     $nom_jeu = str_replace("'"," ",valid_donnees($_POST["nom_jeux"]));
     $date_jeu = valid_donnees($_POST["date_jeux"]);
@@ -36,19 +37,6 @@
         $folder_save = "./../img/";
 
         $identifiant = $_SESSION['user'];
-
-        try{
-
-            /* Connexion à une base de données en PDO */
-            $configs = include('config.php');
-            $servername = $configs['servername'];
-            $username = $configs['username'];
-            $password = $configs['password'];
-            $db = $configs['database'];
-            // On établit la connexion
-            $conn = new PDO("mysql:host=$servername;dbname=$db;charset=UTF8", $username, $password);
-            // On définit le mode d'erreur de PDO sur Exception
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             try{
 
@@ -120,18 +108,8 @@
                 $conn = null;
             }
 
-        }
-        catch(PDOException $e){
-        // erreur de connexion à la bdd
-        //echo "Erreur : " . $e->getMessage();
-        write_error_log("./../log/error_log_ajout_jeu.txt","Impossible de se connecter à la base de données.", $e);
-        echo 'Une erreur est survenue, connexion à la base de données impossible.';
-        }
-
     } else {
-
         echo "Merci de vérifier les informations saisies";
-
     }
 
 ?>

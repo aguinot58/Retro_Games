@@ -49,17 +49,7 @@
                 echo '<img id="alex_deco" src="'.$lien.'img/alex_deco.png" alt="Alex Kidd">';
                 echo '<img id="sora_deco" src="'.$lien.'img/sora_deco.png" alt="Sora de Kingdom Hearts">';
                 
-                try{
-
-                    /* Connexion à une base de données en PDO */
-                    $configs = include($lien.'pages/config.php');
-                    $servername = $configs['servername'];
-                    $username = $configs['username'];
-                    $password = $configs['password'];
-                    $db = $configs['database'];
-
-                    $conn = new PDO("mysql:host=$servername;dbname=$db;charset=utf8", $username,$password);
-                    $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+                require $lien.'pages/conn_bdd.php';
 
                     try{
 
@@ -104,34 +94,6 @@
                                         <p>Nombre de jeux dans le catalogue : '.$nb_jeux_tot.'</p>
                                     </div>';
                             $nb_jeux_integre = 0;
-
-                            /*while ($nb_jeux_integre < $nb_jeux_tot) {
-
-                                //Sélectionne les valeurs dans les colonnes pour chaque entrée de la table
-                                $sth = $conn->prepare("SELECT Id_jeux, Nom_jeux, Img_jeux FROM jeux WHERE Cat_jeux = $consoles and Etat_jeux = 1");
-                                $sth->execute();
-                                //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
-                                $jeux = $sth->fetchAll(PDO::FETCH_ASSOC);
-
-                                echo '<article class="log">';
-                                    echo '<div class="etagere">';
-                                        echo '<ul class="jeux_etagere">';
-                                
-                                foreach ($jeux as $jeu) {
-
-                                    echo      ' <li class="carte"><img id='.$jeu['Id_jeux'].'  src="../img/'.$jeu['Img_jeux'].' " alt="jaquette'.$jeu['Nom_jeux'].' "" onclick="page_jeux(event)"></li>';
-
-                                    $nb_jeux_integre += 1;
-
-                                }
-                                    echo     '</ul>
-                                        </div>
-
-                                    </article>
-                                </div>
-                            </div>';
-                        
-                            }*/
 
                             $page = (!empty($_GET['page']) ? $_GET['page'] : 1);
                             $limite = 12;
@@ -225,26 +187,6 @@
                         $conn = null;
                         
                     }      
-                    
-                    
-                }
-                catch(PDOException $e){
-                    echo "Erreur : " .$e->getMessage();
-
-                    date_default_timezone_set('Europe/Paris');
-                    setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-                    $format1 = '%A %d %B %Y %H:%M:%S';
-                    $date1 = strftime($format1);
-                    $fichier = fopen('./../log/error_log_categorie.txt', 'c+b');
-                    fseek($fichier, filesize('./../log/error_log_categorie.txt'));
-                    fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données. Erreur : " .$e);
-                    fclose($fichier);
-
-                    echo    '<article>
-                                <p>Une erreur est survenue lors de la connexion à la base de données.<br><br>
-                                    Merci de rafraichir la page, et si le problème persiste, de réessayer ultérieurement.   </p>
-                            </article>';
-                }
                 
             } else {
 

@@ -11,6 +11,7 @@
     }
 
     require $lien.'pages/fonctions.php';
+    require $lien.'pages/conn_bdd.php';
 
     if(!empty($_POST)){
 
@@ -25,21 +26,8 @@
 
             if (($nouveau_mdp === $conf_mdp)) {
 
-                /* Connexion à une base de données en PDO */
-                $configs = include($lien.'pages/config.php'); 
-                $servername = $configs['servername'];
-                $username = $configs['username'];
-                $password = $configs['password'];
-                $db = $configs['database'];
-                //On établit la connexion
-                try{
-                    $conn = new PDO("mysql:host=$servername;dbname=$db;charset=UTF8", $username, $password);
-                    //On définit le mode d'erreur de PDO sur Exception
-                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
                     try{
 
-                        $pepper = $configs['pepper'];
                         $ancien_pwd_peppered = hash_hmac("sha256", $ancien_mdp, $pepper);
 
                         $sth = $conn->prepare("SELECT Mdp_user FROM utilisateurs where Ident_user = '$ident_user'");
@@ -77,56 +65,33 @@
                         }
 
                     }
-                    catch(PDOException $e){
-                                        
-                    date_default_timezone_set('Europe/Paris');
-                    setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-                    $format1 = '%A %d %B %Y %H:%M:%S';
-                    $date1 = strftime($format1);
-                    $fichier = fopen('./../log/error_log_maj_mdp_user.txt', 'c+b');
-                    fseek($fichier, filesize('./../log/error_log_maj_mdp_user.txt'));
-                    fwrite($fichier, "\n\n" .$date1. " - Erreur maj mdp user. Erreur : " .$e);
-                    fclose($fichier);
+                    catch(PDOException $e){                  
+                        date_default_timezone_set('Europe/Paris');
+                        setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
+                        $format1 = '%A %d %B %Y %H:%M:%S';
+                        $date1 = strftime($format1);
+                        $fichier = fopen('./../log/error_log_maj_mdp_user.txt', 'c+b');
+                        fseek($fichier, filesize('./../log/error_log_maj_mdp_user.txt'));
+                        fwrite($fichier, "\n\n" .$date1. " - Erreur maj mdp user. Erreur : " .$e);
+                        fclose($fichier);
 
-                    /*Fermeture de la connexion à la base de données*/
-                    $sth = null;
-                    $conn = null;
-                    
-                    echo   'Erreur maj mdp utilisateur - annulation';
+                        /*Fermeture de la connexion à la base de données*/
+                        $sth = null;
+                        $conn = null;
+                        
+                        echo   'Erreur maj mdp utilisateur - annulation';
                     }
 
-                }
-                /*On capture les exceptions et si une exception est lancée, on écrit dans un fichier log
-                *les informations relatives à celle-ci*/
-                catch(PDOException $e){
-                date_default_timezone_set('Europe/Paris');
-                setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-                $format1 = '%A %d %B %Y %H:%M:%S';
-                $date1 = strftime($format1);
-                $fichier = fopen('./../log/error_log_maj_mdp_user.txt', 'c+b');
-                fseek($fichier, filesize('./../log/error_log_maj_mdp_user.txt'));
-                fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données - Erreur : " .$e);
-                fclose($fichier);
-                                        
-                echo   'Erreur connexion bdd - annulation';
-                }
-
             } else {
-
                 echo 'Nouveau mdp et mdp de confirmation différents - annulation';
-
             }
 
         } else {
-
             echo 'Champs vide(s) ou problème de format au niveau du mdp - annulation';
-
         }
 
     } else {
-
         echo 'Erreur données transmises - annulation';
-
     } 
 
 ?>
