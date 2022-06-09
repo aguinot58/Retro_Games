@@ -14,23 +14,11 @@
             $lien = "./../";
         }
 
-
-
-        /* Connexion à une base de données en PDO */
-        $configs = include($lien.'pages/config.php'); 
-        $servername = $configs['servername'];
-        $username = $configs['username'];
-        $password = $configs['password'];
-        $db = $configs['database'];
-        //On établit la connexion
-        try{
-            $conn2 = new PDO("mysql:host=$servername;dbname=$db;charset=UTF8", $username, $password);
-            //On définit le mode d'erreur de PDO sur Exception
-            $conn2->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        require $lien.'pages/conn_bdd.php';
 
             try{
 
-                $sth = $conn2->prepare("SELECT * FROM categories WHERE Id_cat = $id_cat");
+                $sth = $conn->prepare("SELECT * FROM categories WHERE Id_cat = $id_cat");
                 $sth->execute();
 
                 $consoles = $sth->fetchALL(PDO::FETCH_ASSOC);
@@ -122,47 +110,27 @@
                                     
                             /*Fermeture de la connexion à la base de données*/
                             $sth = null;
-                            $conn2 = null;
+                            $conn = null;
 
                             break;
                                       
                 }
             }
-            catch(PDOException $e){
-                                
-            date_default_timezone_set('Europe/Paris');
-            setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-            $format1 = '%A %d %B %Y %H:%M:%S';
-            $date1 = strftime($format1);
-            $fichier = fopen('./../log/error_log_modif_jeux.txt', 'c+b');
-            fseek($fichier, filesize('./../log/error_log_modif_jeux.txt'));
-            fwrite($fichier, "\n\n" .$date1. " - Erreur import données jeux. Erreur : " .$e);
-            fclose($fichier);
+                catch(PDOException $e){
+                                    
+                date_default_timezone_set('Europe/Paris');
+                setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
+                $format1 = '%A %d %B %Y %H:%M:%S';
+                $date1 = strftime($format1);
+                $fichier = fopen('./../log/error_log_modif_jeux.txt', 'c+b');
+                fseek($fichier, filesize('./../log/error_log_modif_jeux.txt'));
+                fwrite($fichier, "\n\n" .$date1. " - Erreur import données jeux. Erreur : " .$e);
+                fclose($fichier);
 
-            /*Fermeture de la connexion à la base de données*/
-            $sth = null;
-            $conn2 = null;    
+                /*Fermeture de la connexion à la base de données*/
+                $sth = null;
+                $conn = null;    
             }
-            
-        }
-        /*On capture les exceptions et si une exception est lancée, on écrit dans un fichier log
-        *les informations relatives à celle-ci*/
-        catch(PDOException $e){
-        date_default_timezone_set('Europe/Paris');
-        setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-        $format1 = '%A %d %B %Y %H:%M:%S';
-        $date1 = strftime($format1);
-        $fichier = fopen('./../log/error_log_modif_jeux.txt', 'c+b');
-        fseek($fichier, filesize('./../log/error_log_modif_jeux.txt'));
-        fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données - Erreur : " .$e);
-        fclose($fichier);
-                                
-        echo   '<article class="container">
-                    <p>Une erreur est survenue lors de la connexion à la base de données.<br><br>
-                    Merci de rafraichir la page, et si le problème persiste, de réessayer ultérieurement.   </p>
-                </article>';
-        }
-        
 
     }else{
         echo 'pb id_cat';

@@ -18,6 +18,8 @@
         $lien = "./../";
     }
 
+    require $lien.'pages/conn_bdd.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -110,25 +112,12 @@
                     setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
                     $date_jour = date('d-m-Y H:i:s');
 
-
                     echo '<div class="container mb-2">
                             <h3 class="mt-3 mb-4">Répondre au message : </h3>';
 
-                    /* Connexion à une base de données en PDO */
-                    $configs = include($lien.'pages/config.php');
-                    $servername = $configs['servername'];
-                    $username = $configs['username'];
-                    $password = $configs['password'];
-                    $db = $configs['database'];
-                    //On établit la connexion
-                    try{
-                        $conn3 = new PDO("mysql:host=$servername;dbname=$db;charset=UTF8", $username, $password);
-                        //On définit le mode d\'erreur de PDO sur Exception
-                        $conn3->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
                         // On extrait l'id user en fonction de l'identifiant de la session de l'admin afin de pouvoir
                         // l'insérer dans la table reponses par la suite.
-                        $sth = $conn3->prepare("SELECT Id_user FROM utilisateurs WHERE Ident_user = :ident_user");
+                        $sth = $conn->prepare("SELECT Id_user FROM utilisateurs WHERE Ident_user = :ident_user");
                         $sth->bindParam(':ident_user', $identifiant_user);
                         $sth->execute();
                         //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
@@ -136,7 +125,7 @@
 
                         try{
 
-                            $sth = $conn3->prepare("SELECT * FROM messages WHERE Id_msg = :id_msg");
+                            $sth = $conn->prepare("SELECT * FROM messages WHERE Id_msg = :id_msg");
                             $sth->bindParam(':id_msg', $id_msg);
                             $sth->execute();
                             //Retourne un tableau associatif pour chaque entrée de notre table avec le nom des colonnes sélectionnées en clefs
@@ -188,7 +177,7 @@
 
                                 /*Fermeture de la connexion à la base de données*/
                                 $sth = null;
-                                $conn3 = null;
+                                $conn = null;
 
                                 break;
 
@@ -196,7 +185,6 @@
 
                         }
                         catch(PDOException $e){
-                            
                             date_default_timezone_set('Europe/Paris');
                             setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
                             $format1 = '%A %d %B %Y %H:%M:%S';
@@ -208,7 +196,7 @@
 
                             /*Fermeture de la connexion à la base de données*/
                             $sth = null;
-                            $conn3 = null;    
+                            $conn = null;    
                         }
 
                 echo '  </div>
@@ -256,29 +244,8 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>';
-
-                    }
-                    /*On capture les exceptions et si une exception est lancée, on écrit dans un fichier log
-                    *les informations relatives à celle-ci*/
-                    catch(PDOException $e){
-                    //echo "Erreur : " . $e->getMessage();
-                    date_default_timezone_set('Europe/Paris');
-                    setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-                    $format1 = '%A %d %B %Y %H:%M:%S';
-                    $date1 = strftime($format1);
-                    $fichier = fopen('./../log/error_log_form_msg.txt', 'c+b');
-                    fseek($fichier, filesize('./../log/error_log_form_msg.txt'));
-                    fwrite($fichier, "\n\n" .$date1. " - Impossible de se connecter à la base de données. Erreur : " .$e);
-                    fclose($fichier);
-                        
-                    echo   '<article class="container">
-                                <p>Une erreur est survenue lors de la connexion à la base de données.<br><br>
-                                    Merci de rafraichir la page, et si le problème persiste, de réessayer ultérieurement.   </p>
-                            </article>';
-                    }    
-
-                    echo '</div>';
+                        </div>
+                    </div>';
 
                 } else {
 

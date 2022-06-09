@@ -1,0 +1,37 @@
+
+
+jeudi 09 juin 2022 11:42:21 - Impossible de se connecter à la base de données. Erreur : PDOException: SQLSTATE[HY000] [1045] Access denied for user 'qcdt0753_connexion_site'@'localhost' (using password: YES) in C:\laragon\www\Retro_Games\pages\conn_bdd.php:22
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\conn_bdd.php(22): PDO->__construct('mysql:host=loca...', 'qcdt0753_connex...', 'Hltcrg3_nRG')
+#1 C:\laragon\www\Retro_Games\pages\categorie.php(52): require('C:\\laragon\\www\\...')
+#2 {main}
+
+jeudi 09 juin 2022 11:43:11 - Impossible de se connecter à la base de données. Erreur : PDOException: SQLSTATE[HY000] [1045] Access denied for user 'qcdt0753_connexion_site'@'localhost' (using password: YES) in C:\laragon\www\Retro_Games\pages\conn_bdd.php:22
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\conn_bdd.php(22): PDO->__construct('mysql:host=loca...', 'qcdt0753_connex...', 'Hltcrg3_nRG')
+#1 C:\laragon\www\Retro_Games\pages\categorie.php(52): require('C:\\laragon\\www\\...')
+#2 {main}
+
+jeudi 09 juin 2022 11:43:24 - Impossible de se connecter à la base de données. Erreur : PDOException: SQLSTATE[HY000] [1045] Access denied for user 'qcdt0753_connexion_site'@'localhost' (using password: YES) in C:\laragon\www\Retro_Games\pages\conn_bdd.php:22
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\conn_bdd.php(22): PDO->__construct('mysql:host=loca...', 'qcdt0753_connex...', 'Hltcrg3_nRG')
+#1 C:\laragon\www\Retro_Games\pages\jeux.php(25): require('C:\\laragon\\www\\...')
+#2 {main}
+
+jeudi 09 juin 2022 11:50:00 - Impossible de se connecter à la base de données. Erreur : PDOException: SQLSTATE[HY000] [1045] Access denied for user 'qcdt0753_connexion_site'@'localhost' (using password: YES) in C:\laragon\www\Retro_Games\pages\conn_bdd.php:22
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\conn_bdd.php(22): PDO->__construct('mysql:host=loca...', 'qcdt0753_connex...', 'Hltcrg3_nRG')
+#1 C:\laragon\www\Retro_Games\pages\jeux.php(25): require('C:\\laragon\\www\\...')
+#2 {main}
+
+jeudi 09 juin 2022 11:50:59 - Impossible de se connecter à la base de données. Erreur : PDOException: SQLSTATE[HY000] [1045] Access denied for user 'qcdt0753_connexion_site'@'localhost' (using password: YES) in C:\laragon\www\Retro_Games\pages\conn_bdd.php:22
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\conn_bdd.php(22): PDO->__construct('mysql:host=loca...', 'qcdt0753_connex...', 'Hltcrg3_nRG')
+#1 C:\laragon\www\Retro_Games\pages\login.php(14): require('C:\\laragon\\www\\...')
+#2 {main}
+
+jeudi 09 juin 2022 11:53:34 - Impossible de se connecter à la base de données. Erreur : PDOException: SQLSTATE[HY000] [1045] Access denied for user 'qcdt0753_connexion_site'@'localhost' (using password: YES) in C:\laragon\www\Retro_Games\pages\conn_bdd.php:24
+Stack trace:
+#0 C:\laragon\www\Retro_Games\pages\conn_bdd.php(24): PDO->__construct('mysql:host=loca...', 'qcdt0753_connex...', 'Hltcrg3_nRG')
+#1 C:\laragon\www\Retro_Games\pages\login.php(14): require('C:\\laragon\\www\\...')
+#2 {main}
