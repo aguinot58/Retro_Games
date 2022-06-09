@@ -19,7 +19,7 @@
         $db = $inifile['Base_locale']['database'];
     } else {
         $base = "prod";
-        $inifile = parse_ini_file(lien_prod.'etc/ini/retro.ini',true);
+        $inifile = parse_ini_file($lien_prod.'etc/ini/retro.ini',true);
         $servername = $inifile['Base_prod']['servername'];
         $username = $inifile['Base_prod']['username'];
         $password = $inifile['Base_prod']['password'];
